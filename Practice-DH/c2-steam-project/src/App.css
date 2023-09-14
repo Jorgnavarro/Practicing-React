@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body{
+  background-color: black;
+}
+
+#container-games:hover{
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+#container-card{
+  height: 95%;
+}
+
+
+
