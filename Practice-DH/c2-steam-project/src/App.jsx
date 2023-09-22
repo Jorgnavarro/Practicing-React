@@ -1,11 +1,12 @@
 import './App.css';
 import { Game } from './Game';
 import dataGame  from './fake_Api/data.json';
+import { List } from './List';
 function App() {
   
   return (
     <>
-      <section className='container-section container text-center row'>
+      <List>
         {
           dataGame.map(game =>{
             const {id, name, imgUrl, tags } = game;
@@ -18,7 +19,7 @@ function App() {
           })
 
         }
-        </section>
+        </List>
     </>
   )
 }

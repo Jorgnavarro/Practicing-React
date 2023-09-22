@@ -9,14 +9,7 @@ body{
   background-color: black;
 }
 
-#container-games:hover{
-  cursor: pointer;
-  opacity: 0.6;
-}
 
-#container-card{
-  height: 95%;
-}
 
 
 
