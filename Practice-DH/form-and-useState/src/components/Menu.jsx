@@ -20,7 +20,8 @@ export function Menu({ agregarAlPedido }) {
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        agregarAlPedido(formValues.name);
+        //en esta línea indicamos que si se presenta cambio en alguno de los dos sea input o el select, que los agregue al pedido
+        agregarAlPedido(formValues.name||formValues.select);
         setFormValues(initialValues.name);
         message.info("Order ready!!")
     }
