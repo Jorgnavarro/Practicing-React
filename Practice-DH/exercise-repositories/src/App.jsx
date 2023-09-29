@@ -16,11 +16,11 @@ function App() {
   return (
     <>
       <div className='container-repositories'> 
-        <h2>Repository Details</h2>
+        <h2>Repository Details📥</h2>
         <RepositoryDetail detailRepository={detailRepository} />
+          <h2>Repositories List📤</h2>
         <List data={data} handleSelect={handleSelect}/>
       </div>
-      
     </>
   )
 }
