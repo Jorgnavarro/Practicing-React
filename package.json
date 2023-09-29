@@ -1,0 +1,20 @@
+{
+  "name": "practicing-react",
+  "version": "1.0.0",
+  "description": "This repository is exclusively to review all the basics of React with exercises that will become more complex.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jorgnavarro/Practicing-React.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jorgnavarro/Practicing-React/issues"
+  },
+  "homepage": "https://github.com/Jorgnavarro/Practicing-React#readme"
+}
