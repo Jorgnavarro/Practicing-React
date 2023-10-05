@@ -48,3 +48,6 @@
 .cont button{
   margin: 0.5rem;
 }
+.cont-note{
+    gap: 1rem;
+}
