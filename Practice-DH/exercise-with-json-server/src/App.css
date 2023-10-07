@@ -51,3 +51,6 @@
 .cont-note{
     gap: 1rem;
 }
+.hidden-element{
+    display: none;
+}

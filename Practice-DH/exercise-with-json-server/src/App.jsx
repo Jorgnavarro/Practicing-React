@@ -1,13 +1,14 @@
 import './App.css'
-import axios from "axios"
 import { useState, useEffect } from 'react';
 import { Note } from './components/Note';
 import noteService from './services/note.js';
+import { Notification } from './components/Notification';
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     console.log("effect");
@@ -42,10 +43,13 @@ function App() {
         .then(updatedNote =>{
             setNotes(notes.map( note => note.id !== id?note: updatedNote));
         }).catch(error=>{
-            console.log(error);
-            alert(
+            setErrorMessage(
               `the note '${note.content}' was already deleted from server`
             )
+            
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
             setNotes(notes.filter(n => n.id !== id))
             }
         )
@@ -57,8 +61,16 @@ function App() {
 
   const handleDeleteNote = (id) =>{
       noteService.deleteNote(id)
-        .then(answerDelete =>{
-            console.log(answerDelete);
+        .then(answer =>{
+            if(answer.status === 200){
+              console.log(`The note with id: ${id} was succesfully deleted`);
+            }
+        })
+        .catch(error =>{
+            console.log(error);
+            if(error.message === "Network Error"){
+                alert("Connection to the server has a problem, try again later...");
+            }
         })
   }
 
@@ -68,6 +80,7 @@ function App() {
 
     <div>
       <h1>Notes✍🏾</h1>
+      <Notification message={errorMessage}/>
       <div className='mt-3'>
         <button onClick={() => {
           setShowAll(!showAll)
