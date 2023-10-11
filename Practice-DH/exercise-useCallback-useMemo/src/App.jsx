@@ -1,11 +1,16 @@
 import { useState, useCallback, memo } from 'react'
 import './App.css'
+import { SimpleElements } from './components/SimpleElements';
+
 
 /* The following function, declared outside the App() component, uses "memo" to store the value of the function that is triggered when the event is executed, inside the component*/
+
 const Button = memo(({handleClick, name}) =>{
   console.log(`${name} rendered`);
   return <button onClick={handleClick}>{name}</button>
 });
+
+/*The memo function returns a component, with the event that will be triggered within the main component. In this case it is a button*/
 
 function App() {
   console.log('counter rendered');
@@ -19,6 +24,8 @@ function App() {
     setCountTwo(countTwo + 1);
 },[countTwo]);
 
+/*In our return, we call the Button element that we have created outside the app component, and we pass it the necessary parameters to make it functional. */
+
   return (
     <>
     <div>
@@ -29,6 +36,7 @@ function App() {
     {countTwo}
       <Button handleClick={memoizedSetCountTwo} name="button2"/>
     </div>
+    <SimpleElements/>
     </>
   )
 }
