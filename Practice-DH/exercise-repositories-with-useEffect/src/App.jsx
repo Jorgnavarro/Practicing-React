@@ -1,10 +1,12 @@
 
 import { useEffect, useState  } from 'react'
 import './App.css'
+import { RepoDetail } from './components/RepoDetail';
 import { Select } from './components/Select'
 
 function App() {
   const[dataRepos, setDataRepos] = useState([]);
+  const [repo, setRepo] = useState(null);
 
   useEffect(()=>{
       async function getData(){
@@ -24,13 +26,26 @@ function App() {
       }
       getData()
   }, [])
-  
-  console.log(dataRepos);
+
+   async function repoSelected (repository){
+      console.log(repository);
+      try {
+        const callApi = await fetch (`https://api.github.com/repos/gabymorgi/${repository}`)
+        const response = await callApi.json()
+        setRepo(response);
+      } catch (error) {
+        setRepo(null);
+      }
+      
+  }
+  console.log(repo);
+
 
   return (
     
   <div>
-  <Select listRepos={dataRepos}/>
+    <Select listRepos={dataRepos} onChange={repoSelected}/>
+    <RepoDetail repo={repo}/>
   </div>
   )
 }
