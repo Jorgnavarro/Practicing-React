@@ -1,52 +1,47 @@
 
-import { useEffect, useState  } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { RepoDetail } from './components/RepoDetail';
 import { Select } from './components/Select'
 
 function App() {
-  const[dataRepos, setDataRepos] = useState([]);
+
   const [repo, setRepo] = useState(null);
 
-  useEffect(()=>{
-      async function getData(){
-        try {
-          const callApi = await fetch("https://api.github.com/users/gabymorgi/repos");
-          const response = await callApi.json();
-          setDataRepos(
-              response.map(repo=>{
-                  return repo.name
-              })
-          )
-
-        } catch (e) {
-          throw new Error("Data not found")
-        }
-        
-      }
-      getData()
-  }, [])
-
-   async function repoSelected (repository){
-      console.log(repository);
-      try {
-        const callApi = await fetch (`https://api.github.com/repos/gabymorgi/${repository}`)
-        const response = await callApi.json()
-        setRepo(response);
-      } catch (error) {
+  async function repoSelected(repository) {
+    if(repository.includes("Please")){
         setRepo(null);
-      }
+    }else{
+      try {
+        const callApi = await fetch(`https://api.github.com/repos/gabymorgi/${repository}`)
+
+        const response = await callApi.json();
       
+        const reponseLanguages = await fetch(response.languages_url);
+
+        const languagesResponse = await reponseLanguages.json();
+        setRepo(
+          {
+            ...response,
+            languages: languagesResponse,
+          }
+          );
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    
+
   }
   console.log(repo);
 
 
   return (
-    
-  <div>
-    <Select listRepos={dataRepos} onChange={repoSelected}/>
-    <RepoDetail repo={repo}/>
-  </div>
+
+    <div>
+      <Select onChange={repoSelected} />
+      <RepoDetail repo={repo} />
+    </div>
   )
 }
 
