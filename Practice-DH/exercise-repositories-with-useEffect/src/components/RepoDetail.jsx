@@ -11,11 +11,7 @@ export function RepoDetail({ repo }) {
                 <tbody>
                     <tr>
                         <th scope="row">Description: </th>
-                        <td>{repo.description}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Language: </th>
-                            <td>{repo.language}</td>
+                        <td>{repo.description===null?"Empy":repo.description}</td>
                     </tr>
                     <tr>
                         <th scope="row">Subscribers: </th>
@@ -25,6 +21,16 @@ export function RepoDetail({ repo }) {
                         <th scope="row">Created at: </th>
                         <td>{repo.created_at}</td>
                     </tr>
+                    <h5 className="text-center">Lenguages</h5>
+                    <>
+                        {Object.keys(repo.languages).map((key, index)=>{
+                                return <tr>
+                                        <th scope="row" key={index}>{key}</th>
+                                        <td key={key}>{repo.languages[key]}</td>
+                                </tr>
+                        })
+                        }
+                    </>
                 </tbody>
             </table>
         </div>
