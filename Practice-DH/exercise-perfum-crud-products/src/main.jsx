@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { createServer, Model } from "miragejs";
+import {BrowserRouter as Router} from 'react-router-dom';
 
 createServer({
   models: {
@@ -17,6 +18,16 @@ createServer({
       stock: 52,
       category: "fragrances",
       image: "https://dummyjson.com/image/i/products/12/thumbnail.jpg",
+    });
+    server.create("product", {
+      id: 2,
+      title: "Samsung Galaxy S23 Ultra",
+      description: "This model has a 12 MP self-portrait camera, a 12 MP ultra-wide camera and two 10 MP telephoto cameras with 10X and 3X optical zoom. Regarding the video section, the S23 Ultra cameras allow you to record in 8K up to 30 FPS, and in 4K up to 60 FPS, while the front lens records at 4K 60 FPS.",
+      price: 1500,
+      stock: 23,
+      brand: "Samsung",
+      category: "smartphones",
+      image: "https://www.incredible.co.za/media/catalog/product/cache/7ce9addd40d23ee411c2cc726ad5e7ed/g/a/galaxy_s23_ultra_black_with_decal_ecommerce_f3ac.png",
     });
     server.create("product", {
       id: 10,
@@ -66,6 +77,9 @@ createServer({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>,
+
 )
