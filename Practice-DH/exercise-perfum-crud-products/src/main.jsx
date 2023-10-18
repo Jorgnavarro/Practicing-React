@@ -16,6 +16,7 @@ createServer({
       description: "Royal_Mirage Sport Brown Perfu...",
       price: 40,
       stock: 52,
+      brand: "Versace",
       category: "fragrances",
       image: "https://dummyjson.com/image/i/products/12/thumbnail.jpg",
     });
@@ -29,8 +30,19 @@ createServer({
       category: "smartphones",
       image: "https://www.incredible.co.za/media/catalog/product/cache/7ce9addd40d23ee411c2cc726ad5e7ed/g/a/galaxy_s23_ultra_black_with_decal_ecommerce_f3ac.png",
     });
+    server.create("product",{
+      id: 3,
+      title: "4K Ultra HD TV Sony X900H",
+      description: "4K Ultra HD Smart LED TV with HDR, Gaming Mode and Alexa Compatibility, 2020 Model",
+      price: 2500,
+      stock: 20,
+      brand: "Sony",
+      category: "screens",
+      image: "https://m.media-amazon.com/images/I/71Fz2Ji1fCL._SL1500_.jpg",
+
+    });
     server.create("product", {
-      id: 10,
+      id: 4,
       title: "HP Pavilion 15-DK1056WM",
       description: "HP Pavilion 15-DK1056WM Gaming...",
       price: 1099,
