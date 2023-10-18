@@ -66,6 +66,9 @@ export function CreateProduct (){
                 title: "The product has been created successfully.",
                 icon:"success",
             })
+            setTimeout(()=>{
+                navigate(-1);
+            }, 3000)
 
         }else{
             Swal.fire({
