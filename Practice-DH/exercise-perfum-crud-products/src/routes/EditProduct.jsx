@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 export function EditProduct() {
     const [product, setProduct] = useState({})
@@ -79,17 +80,39 @@ export function EditProduct() {
             }
         }
         if(Object.keys(differences).length=== 0){
-            console.log("no se realizaron cambios");
+            Swal.fire({
+                title: "No changes were made!",
+                icon: "warning",
+            })
         }else{
-            async function updateProduct (){
-                const productToChange = await ( await fetch(`http://127.0.0.1:5173/api/products/${params.id}`, {
-                    method: "PUT",
-                    body: JSON.stringify(differences),
-                })).json();
-                console.log(productToChange);
-            }
-            updateProduct()
-            console.log("differences to send: " , differences);
+            Swal.fire({
+                title: `Are you sure you want to make these changes?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Update product!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    async function updateProduct (){
+                        const productToChange = await ( await fetch(`http://127.0.0.1:5173/api/products/${params.id}`, {
+                            method: "PUT",
+                            body: JSON.stringify(differences),
+                        })).json();
+                        console.log(productToChange);
+                    }
+                    updateProduct()
+                    console.log("differences to send: " , differences);
+                    Swal.fire(
+                        'Updated!',
+                        'Your product has been updated.',
+                        'success'
+                    )
+                }
+            }).catch(error=>{
+                console.log(error);
+            })
+
         }
     }
 

@@ -1,5 +1,6 @@
 import { useState} from "react";
 import { useNavigate} from "react-router-dom"
+import Swal from 'sweetalert2';
 
 
 export function CreateProduct (){
@@ -58,12 +59,21 @@ export function CreateProduct (){
                     method: "POST",
                     body: JSON.stringify(newProduct),
                 })).json();
-                console.log(createProduct);
+                console.log(productNew);
             }
             createProduct()
+            Swal.fire({
+                title: "The product has been created successfully.",
+                icon:"success",
+            })
+
         }else{
-            console.log("no se puede crear producto falta algún dato");
+            Swal.fire({
+                title: "The product cannot be created, incomplete or erroneous data, please review.",
+                icon: "error"
+            })
         }
+        
     }
 
     function goBack(){
