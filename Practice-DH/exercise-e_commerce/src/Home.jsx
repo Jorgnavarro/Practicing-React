@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Card from "./components/Card"
 
+/**
+ * 
+ * @returns A list of  beers cards with data brought from the API
+ */
+
 const Home = () => {
     const [beers, setBeers] = useState([])
 

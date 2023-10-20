@@ -117,6 +117,8 @@ button:focus-visible {
   align-content: center;
 }
 
-.navbar_container{
-  width: 20%;
+.nav_elements{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react"
-import { Outlet, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 //Esta pagina renderizará cada bebida de manera individual
+/**
+ * @params {params} It is a hook that stores dynamic information of the URL, which was previously configured in another component, in this case from APP in Route in the path the configuration "beer/:id" is written. Then in Home, the redirect "/beer/${id}" is created with the navigate, information that will be captured by the useParams(), with "params.id", which will be passed to the fetch that will bring us the information of that specific beer .
+ * @returns A card with the details of the clicked beer
+ */
 
 const Beer = () => {
     const [beer, setBeer] = useState([])
