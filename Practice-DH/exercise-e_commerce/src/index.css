@@ -103,3 +103,20 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.container_detail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container_app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.navbar_container{
+  width: 20%;
+}

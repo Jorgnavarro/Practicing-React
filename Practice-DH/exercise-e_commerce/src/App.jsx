@@ -6,10 +6,12 @@ import Home from './Home';
 
 function App() {
   return (
-    <div>
+    <div className='container_app'>
       <h1>Mas que solo bebidas, festejemos el encuentro.</h1>
+      <div className='navbar_container'>
+      <Navbar/>
+      </div>
       <Routes>
-                <Route index element={<Navbar/>}/>
                 <Route path='contact' element={<Contact />} />
                 <Route path='/home' element={<Home />}/>
                 <Route path='beer/:id' element={<Beer />} />
