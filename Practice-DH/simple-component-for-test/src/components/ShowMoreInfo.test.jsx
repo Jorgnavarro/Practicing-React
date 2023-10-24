@@ -19,6 +19,13 @@ describe('ShowMoreInfo', () => {
         expect(screen.queryByText(/more power/i)).toBeNull()
     })
 
+    /*This form getByRole its the most recomendated */
+    test('Btn is present in the DOM', ()=>{
+            //const btn = screen.getByRole("button", {name: "See more..."})
+            const btn = screen.getByRole("button");
+            expect(btn.textContent).toBe("See more...")
+    })
+
     test('should show the paragraph when the button is clicked', ()=>{
         const button = screen.getByText(/See more.../i);
         fireEvent.click(button);
