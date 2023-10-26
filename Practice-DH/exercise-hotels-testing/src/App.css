@@ -15,8 +15,14 @@
   height: 100%;
 }
 
+.container_li{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .container_list{
-  width: 30%;
+  width: 50%;
 }
 
 .container_services{
