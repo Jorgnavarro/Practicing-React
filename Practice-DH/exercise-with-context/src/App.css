@@ -1,0 +1,14 @@
+.container_exercise{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 30%;
+  border: 1px red solid;
+}
