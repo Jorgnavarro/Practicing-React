@@ -17,6 +17,7 @@ export function SimpleElements(){
     console.log(`SimpleElements re-render, ${counter}`);
 
     const changeCounter = () =>{
+        console.log("estoy en esta función");
         setCounter(counter + 1);
     }
 

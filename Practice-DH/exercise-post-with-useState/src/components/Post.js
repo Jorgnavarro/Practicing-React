@@ -16,6 +16,7 @@ import { useState } from 'react'
 export default function Post(props) {
 
   const[likes, setLikes] = useState(0)
+  
   function handleClik(){
     setLikes(likes + 1)
     props.likes()
@@ -25,7 +26,7 @@ export default function Post(props) {
     <div className='posteo'>
       <h3>{props.infoPost.titulo}</h3>
       <p>{props.infoPost.texto}</p>
-      <button onClick={()=>{handleClik()}}>👍🏾</button>
+      <button onClick={handleClik}>👍🏾</button>
       {likes>10?<h5>Más de 10 likes</h5>:<h5>Likes: {likes}</h5>}
     </div>
   )

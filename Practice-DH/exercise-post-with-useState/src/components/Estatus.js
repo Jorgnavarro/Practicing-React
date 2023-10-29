@@ -9,7 +9,6 @@ import React from 'react'
 //    p > span     (el span mostrará la cantidad recibida por props)
 
 export default function Estatus(props) {
-  
   return (
     <header>
         <h1>Estatus de posteos</h1>
