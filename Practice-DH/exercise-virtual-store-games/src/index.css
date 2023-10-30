@@ -34,6 +34,7 @@ header {
   padding: 16px;
   font-weight: bolder;
   border-bottom: 1px solid #333;
+  margin-bottom: 1rem;
 }
 
 header img {
@@ -73,16 +74,13 @@ input, select {
   justify-content: space-between;
 }
 
-.card {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid
-}
+
+
 .ant-card-head-title{
   color: white;
 }
 
 .ant-table-cell, td{
   background-color: #222;
-  color: white;
+  color: gray;
 }

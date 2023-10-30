@@ -13,7 +13,7 @@ export const Game = (props) => {
           Add to cart
         </Button>
       }
-      style={{backgroundColor: "#242424"}}
+      style={{backgroundColor: "#242424", border: "grey 1px solid"}}
     >
       <span>{props.game.description}</span>
       <img width='100%' src={props.game.imgUrl} alt={props.game.name} />
