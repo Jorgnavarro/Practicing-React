@@ -3,14 +3,35 @@ import { Header } from './components/Header';
 import { useState } from 'react';
 import { Button } from './components/Button';
 import { PedidosMultiples } from './components/PedidosMultiples';
+import { useReducer } from 'react';
+
+const initialState = {count: 0};
+
+function reducer(state, action){
+  switch(action.type){
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    case 'reset':
+      return {count: state.count = 0};
+    default: 
+      throw new Error();
+  }
+}
 
 function App() {
   const food = ["Hamburguer", "Pizza", "Hot dog", "French fries", "Soda", "Water"]
-  const [counter, setCounter] = useState(0);
-  const [pedido, setPedido] = useState()
-  const increaseByOne = () => setCounter(counter +1);
-  const decreaseByOne = () => setCounter(counter -1);
-  const setToZero = () => setCounter(0);
+  // const [counter, setCounter] = useState(0);
+  const [pedido, setPedido] = useState();
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  // const increaseByOne = () => setCounter(counter +1);
+  // const decreaseByOne = () => setCounter(counter -1);
+  // const setToZero = () => setCounter(0);
+
+  console.log(state);
   
   const selectFood = (e) =>{
       console.log(e.target);
@@ -39,11 +60,11 @@ function App() {
 
   return (
     <div className="App">
-          <Header counter={counter}/>
+          <Header counter={state.count}/>
           <div className='container container-btns'>
-            <Button type="button" className="btn btn-outline-success" text='Plus' handleClick={increaseByOne}/>
-            <Button type="button" className="btn btn-outline-danger" text='Reset' handleClick={setToZero}/>  
-            <Button type="button" className="btn btn-outline-light" text='Minus' handleClick={decreaseByOne}/>
+            <Button type="button" className="btn btn-outline-success" text='Plus' handleClick={()=> dispatch({type: 'increment'})}/>
+            <Button type="button" className="btn btn-outline-danger" text='Reset' handleClick={()=>dispatch({type: 'reset'})}/>  
+            <Button type="button" className="btn btn-outline-light" text='Minus' handleClick={()=> dispatch({type: 'decrement'})}/>
           </div>
           <div className='container'>
             <Button type="button" className="btn btn-outline-success"  text="Hacer pedido" handleClick={selectFood}/>
