@@ -12,8 +12,8 @@ function App() {
   const handleClick = async () => {
     const data = await fetch(`https://api.github.com/users/${input}`);
     const json = await data.json();
-    const { name, avatar_url, html_url, login } = json;
-    changeUser({ name, avatar_url, html_url, userName: login });
+    // const { name, avatar_url, html_url, login } = json;
+    changeUser(json);
   }
 
   return (
