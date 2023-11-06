@@ -1,0 +1,79 @@
+.nav_style {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+}
+
+.container_links {
+    display: flex;
+    width: 70%;
+    justify-content: end;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+a:hover {
+    color: rgb(136, 136, 136);
+}
+
+/*seteado input*/
+.darkMode {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: black;
+}
+
+.darkMode>p {
+    margin-bottom: 0;
+}
+
+/* seteado animación input type=checkbox  (darkMode-whiteMode)*/
+input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label {
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    background-color: black;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: #ffff;
+    border-radius: 90px;
+    transition: 0.1s;
+}
+
+input:checked+label {
+    background: white;
+}
+
+input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+    background: rgb(219, 219, 219);
+}
+
+label:active:after {
+    width: 20px;
+}

@@ -14,13 +14,15 @@ export const ContextProvider = ({ children }) => {
   )
   const [dentistList, setDentistList] = useState([]);
   
+  
     useEffect(()=>{
         const request = axios.get("https://jsonplaceholder.typicode.com/users")
         request.then(response => setDentistList(response.data))
     },[])
 
-  const toggleTheme = () =>{
-    if(currentTheme === 'light'){
+  const toggleTheme = (e) =>{
+    console.log(e.target.checked);
+    if(e.target.checked){
       setCurrentTheme('dark');
       localStorage.setItem('theme', 'dark')
     }else{
