@@ -1,3 +1,9 @@
+:root{
+  --background-color: white;
+  --text-color: black;
+  --Black-bg: #12121296;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -49,39 +55,11 @@ form {
 }
 
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  display: table;
-  border: 1px solid #ccc;
-
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .dark {
-  background-color: #12121296;
-  color: white;
-}
-
-.dark .container_links>a{
-  color: white;
-}
-
-.dark .container_links>a:hover{
-  color: red;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .dark>a {
-  color: white;
+  color: var(--text-color);
 }

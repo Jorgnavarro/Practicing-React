@@ -12,8 +12,8 @@
     justify-content: end;
 }
 
-a {
-    color: #000;
+a{
+    color: var(--text-color);
     text-decoration: none;
     margin: 5px;
     cursor: pointer;
@@ -46,7 +46,7 @@ label {
     cursor: pointer;
     width: 60px;
     height: 30px;
-    background-color: black;
+    background-color: var(--Black-bg);
     display: block;
     border-radius: 100px;
     position: relative;
@@ -77,3 +77,14 @@ input:checked+label:after {
 label:active:after {
     width: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+

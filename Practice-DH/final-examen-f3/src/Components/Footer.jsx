@@ -1,10 +1,11 @@
 import React from 'react'
+import img_footer from '../../public/images/DH.png'
 
 const Footer = () => {
   return (
     <footer>
         <p>Powered by</p>
-        <img src="./images/DH.png" alt='DH-logo' />
+        <img src={img_footer} alt='DH-logo' />
     </footer>
   )
 }

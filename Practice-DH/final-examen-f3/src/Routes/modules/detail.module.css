@@ -1,0 +1,21 @@
+.container_detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_detail{
+    display: flex;
+    justify-content: center;
+}
+.img_detail>img{
+    width: 300px;
+}
+
+.container_table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}

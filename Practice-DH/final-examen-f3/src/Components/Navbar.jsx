@@ -7,16 +7,9 @@ import styles from './modules/navbar.module.css'
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
-  const { toggleTheme } = useContext(ContextGlobal);
-  const statusTheme = localStorage.getItem('theme')
-  console.log(statusTheme);
-  function handleInput (){
-      if(statusTheme === 'light'){
-        return false;
-      }else{
-        return true;
-      }
-  }
+  const { toggleTheme, handleCheckbox } = useContext(ContextGlobal);
+
+
   return (
     <nav className={styles.nav_style}>
       <h3>DH Odonto</h3>
@@ -28,7 +21,8 @@ const Navbar = () => {
         <Link to="/favs">Favs</Link>
       </div>
       <div className={styles.darkMode}>
-        <input type="checkbox" id="switch" onClick={toggleTheme}/> <label htmlFor="switch" checked={handleInput}></label>
+        <input type="checkbox" id="switch" onChange={toggleTheme} checked={handleCheckbox()}/>
+        <label htmlFor="switch"></label>
     </div>
     </nav>
   )
