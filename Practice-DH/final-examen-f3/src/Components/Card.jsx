@@ -7,8 +7,9 @@ import styles from './modules/card.module.css'
 
 const Card = ({ name, username, id }) => {
   const {currentTheme} = useContext(ContextGlobal)
-  const [styleBtn, setStyleBtn] = useState("")
-  const navigate = useNavigate()
+  const [styleBtn, setStyleBtn] = useState("");
+  const navigate = useNavigate();
+  const dentist = {id, name, username}
 
   useEffect(()=>{
     if(currentTheme === 'dark'){
@@ -18,13 +19,28 @@ const Card = ({ name, username, id }) => {
     }
   },[currentTheme]);
 
+
+  useEffect(()=>{
+    localStorage.setItem('favs', JSON.stringify(listFavs))
+  },[listFavs])
+
+
+
   function goToDetail(id){
       navigate(`/dentist/${id}`)
   }
 
-  const addFav = ()=>{
+  const addFav = (infoDentist)=>{
     // Aqui iria la logica para agregar la Card en el localStorage
+    const listStorage = JSON.parse(localStorage.getItem("favs"))||[];
+    
+
+      if(!listFavs.some(d => d.id === infoDentist.id)){
+        setListFavs((oldList) =>[...oldList, infoDentist])
+      }
+    
   }
+  
 
   return (
     <div className={`card ${styles.cardDefault} ${currentTheme}` } style={{width: "18rem"}} >
@@ -39,7 +55,7 @@ const Card = ({ name, username, id }) => {
     <h5 className="card-text text-center">{username}</h5>
   </div>
     <div className="card-body">
-    <button type="button" className={`btn ${styleBtn}`}>
+    <button onClick={()=>addFav(dentist)} type="button" className={`btn ${styleBtn}`}>
           Add fav
     </button>
     </div>

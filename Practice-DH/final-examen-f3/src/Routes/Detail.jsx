@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './modules/detail.module.css';
 import { useContext } from 'react';
 import { ContextGlobal } from '../Components/utils/globalContext';
-import { useCallback } from 'react';
+
 
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
@@ -14,12 +14,22 @@ const Detail = () => {
   const { id } = useParams();
   const {currentTheme} = useContext(ContextGlobal);
 
+
   useEffect(() => {
+    /*Fetch dentist */
     const request = axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
     request.then(response => setDentist(response.data));
-  }, [])
+  }, [id])
 
-  
+  const styleTable = useMemo(()=>{
+    console.log("im here, memo");
+    if(currentTheme=== "light"){
+        return 'table-light';
+    }else{
+      return 'table-dark';
+    }
+  },[currentTheme])
+
 
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
 
@@ -34,7 +44,7 @@ const Detail = () => {
       <div className={styles.container_table}>
         <table className="table mt-2">
           <thead>
-            <tr className='table-dark'>
+            <tr className={styleTable}>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
@@ -42,7 +52,7 @@ const Detail = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className='table-dark'>
+            <tr className={styleTable}>
               <th scope="row">{dentist?.name}</th>
               <td>{dentist?.email}</td>
               <td>{dentist?.phone}</td>
