@@ -2,44 +2,59 @@ import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ContextGlobal } from "./utils/globalContext";
-import styles from './modules/card.module.css'
+import styles from './modules/card.module.css';
+import Button from "./Button";
+import Swal from 'sweetalert2';
 
 
 const Card = ({ name, username, id }) => {
-  const {currentTheme} = useContext(ContextGlobal)
+  const {currentTheme, removeDentist, listUpdate, setListUpdate} = useContext(ContextGlobal)
   const [styleBtn, setStyleBtn] = useState("");
+  const [changeBtn, setChangeBtn] = useState(true);
+  const[styleAlert, setStyleAlert] = useState("");
   const navigate = useNavigate();
   const dentist = {id, name, username}
 
+  /*Change style btn with theme*/
   useEffect(()=>{
     if(currentTheme === 'dark'){
         setStyleBtn("btn-outline-light");
+        setStyleAlert('black');
     }else{
-        setStyleBtn("btn-outline-dark")
+        setStyleBtn("btn-outline-dark");
+        setStyleAlert("#fff");
     }
   },[currentTheme]);
 
-
-  useEffect(()=>{
-    localStorage.setItem('favs', JSON.stringify(listFavs))
-  },[listFavs])
-
-
-
+  /*move to detail */
   function goToDetail(id){
       navigate(`/dentist/${id}`)
   }
-
+  
   const addFav = (infoDentist)=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
     const listStorage = JSON.parse(localStorage.getItem("favs"))||[];
-    
-
-      if(!listFavs.some(d => d.id === infoDentist.id)){
-        setListFavs((oldList) =>[...oldList, infoDentist])
+    // Aqui iria la logica para agregar la Card en el localStorage
+      setChangeBtn(!changeBtn);
+      if(listStorage === null){
+          localStorage.setItem("favs", JSON.stringify([infoDentist]));
+      }else{
+        if(!listStorage.some(d => d.id === infoDentist.id)){
+          localStorage.setItem("favs", JSON.stringify([...listStorage, infoDentist]));
+        }
       }
-    
+      Swal.fire({
+        icon: "success",
+        title: `<strong>${infoDentist.name}</strong> has been added to favorites.`,
+        showConfirmButton: false,
+        timer: 2000,
+        background: `${styleAlert}`,
+      });
+
   }
+/*This useEffect allow to change in the real time about the btn and the list in favs */
+  useEffect(()=>{
+    setListUpdate( JSON.parse(localStorage.getItem("favs"))||[])
+  },[changeBtn])
   
 
   return (
@@ -55,9 +70,12 @@ const Card = ({ name, username, id }) => {
     <h5 className="card-text text-center">{username}</h5>
   </div>
     <div className="card-body">
-    <button onClick={()=>addFav(dentist)} type="button" className={`btn ${styleBtn}`}>
-          Add fav
-    </button>
+      {!listUpdate.some(d => d.id === id)?
+      <Button handleClick={()=>addFav(dentist)} className={styleBtn}>
+        <i className="bi bi-star"></i>
+      </Button>:<Button className={styleBtn} handleClick={()=>removeDentist(dentist)}>
+        <i className={`bi bi-star-fill ${styles.iconStyle}`}
+        ></i></Button>}
     </div>
   </div>
   );

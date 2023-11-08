@@ -19,7 +19,7 @@ const Detail = () => {
     /*Fetch dentist */
     const request = axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
     request.then(response => setDentist(response.data));
-  }, [id])
+  }, [])
 
   const styleTable = useMemo(()=>{
     console.log("im here, memo");

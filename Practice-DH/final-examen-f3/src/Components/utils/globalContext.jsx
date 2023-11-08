@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
-// export const initialState = {theme: "", data: []}
 
 export const ContextGlobal = createContext();
 
@@ -13,6 +13,10 @@ export const ContextProvider = ({ children }) => {
     localStorage.getItem('theme') || 'light'
   )
   const [dentistList, setDentistList] = useState([]);
+  const [listUpdate, setListUpdate] = useState([]);
+  const [alertBg, setAlertBg] = useState("");
+  const [alertTxt, setAlertTxt] = useState("");
+  const [alertBtnC, setAlertBtnC] = useState("");
   
   
   
@@ -24,12 +28,23 @@ export const ContextProvider = ({ children }) => {
   const toggleTheme = () =>{
     if(currentTheme === "light"){
       setCurrentTheme('dark');
-      localStorage.setItem('theme', 'dark')
+      localStorage.setItem('theme', 'dark');
     }else{
       setCurrentTheme('light')
       localStorage.setItem('theme', 'light');
     }
   }
+  useEffect(()=>{
+    if(currentTheme === "dark"){
+      setAlertBg("black");
+      setAlertTxt("white");
+      setAlertBtnC('black')
+    }else{
+      setAlertBg("#fff");
+      setAlertTxt("black");
+      setAlertBtnC("");
+    }
+  },[currentTheme])
 
   const handleCheckbox = () =>{
     let flag = "";
@@ -44,11 +59,44 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const removeDentist = (infoDentist) =>{
+    Swal.fire({
+      title: `Do you want to remove ${infoDentist.name} from favorites?`,
+      icon: "warning",
+      color:`${alertTxt}`,
+      showCancelButton: true,
+      confirmButtonColor: `${alertBtnC}`,
+      cancelButtonColor: "grey",
+      background: `${alertBg}`,
+      confirmButtonText: "Yes, remove!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const listStorage = JSON.parse(localStorage.getItem("favs"));
+        const newList = listStorage.filter(dentist=>{
+            return dentist.id !== infoDentist.id
+        })
+        setListUpdate(newList);
+        localStorage.setItem("favs", JSON.stringify(newList));
+        Swal.fire({
+          color: `${alertTxt}`,
+          background:`${alertBg}`,
+          text: "Your dentist has been removed from favorites",
+          icon: "success",
+          confirmButtonColor: "grey",
+        });
+      }
+    });
+    
+  }
+
   const values = {
     currentTheme,
     toggleTheme,
     handleCheckbox,
     dentistList,
+    removeDentist,
+    setListUpdate,
+    listUpdate,
 }
 
   return (
