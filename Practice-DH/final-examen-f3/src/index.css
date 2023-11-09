@@ -13,6 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -21,37 +22,34 @@ code {
 h1 {
   text-align: center;
 }
-
+/*seteo general footer, comparte estilos con el module*/
 footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   align-content: center;
-  padding: 2rem;
   position: relative;
   bottom: 0;
   width: 100%;
-  height: 100%;
-  margin-top: 2rem;
+  height: 10%;
+  margin-top: 3rem;
+}
+.defaultBgFooter{
+  background-color: #DC3545;
 }
 
 footer>img {
   width: 200px;
   margin: 0;
 }
-
-footer>p {
-  margin: 0;
-  padding-top: 0.5rem;
-}
+/*acá finaliza*/
 
 form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 300px;
-  height: 100px;
   margin: 0 auto;
+  height: 100vh;
 }
 
 

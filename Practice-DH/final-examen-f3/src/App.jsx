@@ -11,7 +11,7 @@ import { ContextGlobal } from "./Components/utils/globalContext";
 function App() {
     const {currentTheme} = useContext(ContextGlobal);
     return (
-        <div className={currentTheme}>
+        <div className={`app_container ${currentTheme}`}>
                 <Navbar />
                 <Outlet/>
                 <Footer />

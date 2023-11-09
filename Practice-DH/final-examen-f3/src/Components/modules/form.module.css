@@ -2,6 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    background-color: var(--background-color);
+    padding-bottom: 2rem;
 }
 .header_form {
     margin: 2rem;
@@ -9,7 +12,6 @@
 }
 
 .form {
-    background-color: var(--background-color);
     width: 100vw;
     height: 100%;
     display: flex;
@@ -21,8 +23,9 @@
     margin-bottom: 2rem;
 }
 
-#inputEmail,
+
 .inputs{
     width: 100%;
-    padding: 0 3rem;
+    padding: 0 2rem;
+    margin: 0 1rem 0 0;
 }

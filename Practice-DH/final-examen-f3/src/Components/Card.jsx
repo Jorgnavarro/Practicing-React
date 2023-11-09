@@ -5,6 +5,7 @@ import { ContextGlobal } from "./utils/globalContext";
 import styles from './modules/card.module.css';
 import Button from "./Button";
 import Swal from 'sweetalert2';
+import image_doctor from '../images/doctor.jpg'
 
 
 const Card = ({ name, username, id }) => {
@@ -64,7 +65,7 @@ const Card = ({ name, username, id }) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-  <img src="../../images/doctor.jpg" className="card-img-top" alt="dentist image"/>
+  <img src={image_doctor} className="card-img-top" alt="dentist image"/>
   <div className="card-body align-items-center">
     <h4 className={`card-title text-center ${styles.linkDetail}`} onClick={()=>goToDetail(id)}>{name}</h4>
     <h5 className="card-text text-center">{username}</h5>

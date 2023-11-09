@@ -1,0 +1,35 @@
+
+
+
+.container_logo {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-content: center;
+    padding: 2rem;
+    position: relative;
+    bottom: 0;
+}
+
+.container_logo>p{
+    margin: 0;
+    padding-top: 0.4rem;
+}
+
+.container_logo>img{
+    width: 200px;
+}
+
+.container_icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    gap: .3rem;
+    color: black;
+}
+
+
+.container_icons>img {
+    width: 35px;
+}
