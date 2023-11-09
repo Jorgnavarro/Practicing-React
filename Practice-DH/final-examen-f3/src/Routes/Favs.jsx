@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import Card from "../Components/Card";
 import { ContextGlobal } from "../Components/utils/globalContext";
-import styles from './modules/home.module.css'
+import styles from './modules/home.module.css';
+import styles2 from './modules/favs.module.css'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
@@ -12,8 +13,8 @@ const Favs = () => {
   const listStorage = JSON.parse(localStorage.getItem("favs"))||[];
 
   return (
-    <>
-      <h1>Dentists Favs</h1>
+    <div className={styles2.container_favs}>
+      <h1 className="mb-5">Dentists Favs</h1>
       <div className={`${styles.cardGrid}`}>
         {/* este componente debe consumir los destacados del localStorage */}
         {listStorage?.map(dentist =>{
@@ -21,7 +22,7 @@ const Favs = () => {
         })}
         {/* Deberan renderizar una Card por cada uno de ellos */}
       </div>
-    </>
+    </div>
   );
 };
 

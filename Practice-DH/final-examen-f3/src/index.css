@@ -11,8 +11,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
-
+.app_container{
+  height: 100%;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -22,6 +25,7 @@ code {
 h1 {
   text-align: center;
 }
+
 /*seteo general footer, comparte estilos con el module*/
 footer {
   display: flex;
@@ -49,7 +53,7 @@ form {
   flex-direction: column;
   justify-content: space-around;
   margin: 0 auto;
-  height: 100vh;
+  height: 50%;
 }
 
 

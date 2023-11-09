@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ContextGlobal } from './utils/globalContext'
 import styles from './modules/navbar.module.css'
+import { useEffect } from 'react'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
   const { toggleTheme, handleCheckbox } = useContext(ContextGlobal);
+
+
+
 
 
   return (

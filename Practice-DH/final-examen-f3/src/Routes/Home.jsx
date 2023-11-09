@@ -11,8 +11,8 @@ import styles from './modules/home.module.css'
 const Home = () => {
   const {dentistList} = useContext(ContextGlobal);
   return (
-    <main className="container" >
-      <h1>Home</h1>
+    <main >
+      <h1 className='mb-5'>Home</h1>
       <div className={`${styles.cardGrid}`}>
         {/* Aqui deberias renderizar las cards */}
         {dentistList.map(dentist =>{

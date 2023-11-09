@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './modules/detail.module.css';
 import { useContext } from 'react';
 import { ContextGlobal } from '../Components/utils/globalContext';
+import img_dentist from '../images/doctor.jpg';
 
 
 
@@ -39,7 +40,7 @@ const Detail = () => {
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
       <div className={styles.img_detail}>
-        <img src='../../public/images/doctor.jpg' alt='image dentist' />
+        <img src={img_dentist} alt='image dentist' />
       </div>
       <div className={styles.container_table}>
         <table className="table mt-2">

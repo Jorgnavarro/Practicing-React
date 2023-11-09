@@ -3,7 +3,8 @@
     width: 100vw;
     justify-content: space-around;
     align-items: center;
-    padding: 1rem;
+    margin: auto;
+    padding: 1rem 0 1rem 0;
 }
 
 .container_links {
