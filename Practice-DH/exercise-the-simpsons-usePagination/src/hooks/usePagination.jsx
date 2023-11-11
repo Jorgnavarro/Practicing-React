@@ -32,7 +32,7 @@ const usePagination = (data, itemsPerPage) => {
 
     // Ahora, debemos calcular la cantidad de items que mostraremos
     // en cada página (los que realmente se muestran), más alla de lo que
-    // paramos como argumento.
+    // pasamos como argumento.
     // Para ello, debemos tomar el menos valor entre:
     //  a) El producto entre la página actual y el valor de
     // items por página que pasamos como argumento, o
