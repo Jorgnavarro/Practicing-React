@@ -46,7 +46,7 @@ function App() {
             setErrorMessage(
               `the note '${note.content}' was already deleted from server`
             )
-            
+            console.log(error);
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000)
@@ -72,6 +72,7 @@ function App() {
                 alert("Connection to the server has a problem, try again later...");
             }
         })
+      setNotes(notes.filter(n => n.id !== id))
   }
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important === true);

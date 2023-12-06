@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const baseUrl = 'http://localhost:3001/api/notes';
+//después antes de hacer el npm run build, debemos de cambiar la ruta absoluta de nuestro llamado a la API por una relativa, porque el back y el front estarán en una misma dirección.
+const baseUrl = '/api/notes';
 
 const getAll = () =>{
     const request = axios.get(baseUrl);
