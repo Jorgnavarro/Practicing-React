@@ -1,13 +1,14 @@
 import { useReducer } from "react";
-import { createContext, useEffect, useState } from "react";
+import { createContext} from "react";
 
 export const UserContext = createContext();
 
 //Creamos un reducer para manipular la información y almacenarla en un estado
 
 export const gitHubUserReducer = (state, action) =>{
+    console.log(action);
     switch(action.type){
-        case "CHANGE_USER" : 
+        case "CHANGE_USER" : {
             //validamos si el usuario es el mismo que tenemos almacenado
             const existingUser = state.userName === action.payload.login;
             //Si es un usuario distinto, extraemos las propiedades
@@ -21,6 +22,7 @@ export const gitHubUserReducer = (state, action) =>{
                 return newUser;
             }
             return state;
+        }
         default: 
             return state;
     }
