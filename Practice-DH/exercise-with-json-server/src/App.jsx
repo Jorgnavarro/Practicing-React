@@ -1,18 +1,21 @@
 import './App.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Note } from './components/Note';
 import noteService from './services/note.js';
 import { Notification } from './components/Notification';
 import loginService from './services/login';
+import { ContextGlobal } from './context/globalContext';
+
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null)
+  const {errorMessage, setErrorMessage, username, setUser, password, user} = useContext(ContextGlobal)
+  // const [errorMessage, setErrorMessage] = useState(null);
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [user, setUser] = useState(null)
 
   useEffect(() => {
     console.log("effect");
@@ -22,6 +25,15 @@ function App() {
     })
 
   }, [])
+
+  useEffect(() => {
+    const loggeUserJSON = window.localStorage.getItem('loggedUserNotes')
+    if(loggeUserJSON){
+      const user = JSON.parse(loggeUserJSON)
+      setUser(user)
+      noteService.setToken(user.token)
+    }
+  },[setUser])
 
   const addNote = (e) => {
     e.preventDefault()
@@ -87,6 +99,10 @@ function App() {
       const user = await loginService.login({
         username, password
       })
+      window.localStorage.setItem(
+        'loggedUserNotes', JSON.stringify(user)
+      )
+      noteService.setToken(user.token)
       setUser(user)
       setUsername("")
       setPassword("")
@@ -105,7 +121,7 @@ function App() {
         <div className="mb-3">
           <label htmlFor="username" className="form-label">Username</label>
           <input 
-            type="email" 
+            type="text" 
             className="form-control" 
             id="username" 
             placeholder="Write your username here..." 
