@@ -3,12 +3,16 @@ import { useState, useEffect } from 'react';
 import { Note } from './components/Note';
 import noteService from './services/note.js';
 import { Notification } from './components/Notification';
+import loginService from './services/login';
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     console.log("effect");
@@ -77,10 +81,82 @@ function App() {
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important === true);
 
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    try{
+      const user = await loginService.login({
+        username, password
+      })
+      setUser(user)
+      setUsername("")
+      setPassword("")
+    }catch(exception){
+      setErrorMessage('Wrong credentials')
+      setTimeout(()=>{
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
+
+
+  const loginForm = () => (
+    <form onSubmit={handleLogin} id='loginForm'>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">Username</label>
+          <input 
+            type="email" 
+            className="form-control" 
+            id="username" 
+            placeholder="Write your username here..." 
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+            />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="inputPassword" className="form-label">Password</label>
+          <input 
+          type='password'
+          className="form-control" 
+          id="inputPassword" 
+          value={password}
+          onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <div>
+          <button type='submit'>Login</button>
+        </div>
+    </form>
+  )
+
+  const noteForm = () => (
+  <form onSubmit={addNote} className="containerAddNote">
+    <div className='row align-items-center'>
+      <div className="col-9">
+        <input type="text" 
+        className="form-control" 
+        onChange={handleNoteChange} 
+        value={newNote} 
+        placeholder="Write a new note here..."
+        />
+      </div>
+      <div className="col-auto">
+        <button type="submit">Save</button>
+      </div>
+    </div>
+  </form>
+  )
+
   return (
 
-    <div>
+    <div className="containerApp">
       <h1>Notes✍🏾</h1>
+      {user === null 
+      ? loginForm()
+      : <div>
+          <p>{user.name} logged-in</p>
+        </div> 
+      }
       <Notification message={errorMessage}/>
       <div className='mt-3'>
         <button onClick={() => {
@@ -94,16 +170,7 @@ function App() {
           return <Note key={note.id} note={note} toggleImportance={()=> toggleImportanceOf(note.id)} handleDeleteNote={handleDeleteNote} />
         })}
       </ul>
-      <form onSubmit={addNote}>
-        <div className='row align-items-center'>
-          <div className="col-7">
-            <input type="text" className="form-control" onChange={handleNoteChange} value={newNote} />
-          </div>
-          <div className="col-auto">
-            <button type="submit">Save</button>
-          </div>
-        </div>
-      </form>
+      {user !== null && noteForm()}
     </div>
   )
 }
