@@ -1,6 +1,8 @@
 import axios from "axios";
 //después antes de hacer el npm run build, debemos de cambiar la ruta absoluta de nuestro llamado a la API por una relativa, porque el back y el front estarán en una misma dirección.
 const baseUrl = '/api/notes';
+//Este modulo ahora incluye una variable privada llamada token, su valor se puede cambiar con una función setToken.
+//En create(), creamos un objeto más que contiene la configuración del token y la cabecera Authorization.
 
 let token = null
 

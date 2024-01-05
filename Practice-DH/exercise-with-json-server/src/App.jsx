@@ -23,6 +23,8 @@ function App() {
 
   }, [])
 
+  //Acá se comprueba que el usuario ha iniciado sesión y que sus datos se encuentrar en el localStorage
+
   useEffect(() => {
     const loggeUserJSON = window.localStorage.getItem('loggedUserNotes')
     if(loggeUserJSON){
@@ -91,6 +93,12 @@ function App() {
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important === true);
 
+  //Se implementan renderizados condicionales pero con una nueva sintaxis
+  //en el primer renderizado  condicional, user === null ? <loginForm/> :
+  //<div><p>{user.name} logged-in</p></div>, se indica que si el usuario está vacío se habilita el formulario para iniciar sesión, en caso contrario se renderiza el nombre seguido del texto logged-in
+  //En el segundo renderizado: user !== null && <AddNoteForm addNote={addNote} handleNoteChange={handleNoteChange} newNote={newNote}
+  //Se aplica un truco de React, si la primera declaración es falsa o falsy, la segunda declaración no se ejecutará la seguida después del &&, 
+  //si el usuario está logueado aparecerá el input para agregar una nota, de lo contrario, es decir si el user está vacío no aparecerá el campo.
 
   return (
 
