@@ -1,10 +1,35 @@
-export function LoginForm() {
+import { useContext } from 'react'
+import { ContextGlobal } from '../context/globalContext'
+import loginService from '../services/login'
+import noteService from '../services/note'
 
-    
+
+export function LoginForm() {
+const {setErrorMessage, username, setUsername, setUser, password, setPassword} = useContext(ContextGlobal)
+const handleLogin = async (event) => {
+    event.preventDefault()
+    try{
+      const user = await loginService.login({
+        username, password
+      })
+      window.localStorage.setItem(
+        'loggedUserNotes', JSON.stringify(user)
+      )
+      noteService.setToken(user.token)
+      setUser(user)
+      setUsername("")
+      setPassword("")
+    }catch(exception){
+      setErrorMessage('Wrong credentials')
+      setTimeout(()=>{
+        setErrorMessage(null)
+      }, 5000)
+    }
+}
 
 
     return (
-        <form onSubmit={handleLogin} id='loginForm'>
+        <form onSubmit={handleLogin} id='loginForm' className="mb-3">
             <div className="mb-3">
                 <label htmlFor="username" className="form-label">Username</label>
                 <input

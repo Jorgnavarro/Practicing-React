@@ -39,7 +39,9 @@ export const ContextProvider = ({ children }) => {
         errorMessage,
         setErrorMessage,
         username,
+        setUsername,
         password,
+        setPassword,
         user,
         setUser,
         handleLogin
