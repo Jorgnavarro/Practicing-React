@@ -6,14 +6,14 @@ import { Notification } from './components/Notification';
 import { ContextGlobal } from './context/globalContext';
 import { LoginForm } from './components/LoginForm'
 import { AddNoteForm } from './components/AddNoteForm'
+import { HeaderUserInfo } from './components/HeaderUserInfo'
 
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
   const {errorMessage, setErrorMessage, setUser, user} = useContext(ContextGlobal)
-
+  
   useEffect(() => {
     console.log("effect");
     noteService.getAll()
@@ -22,6 +22,8 @@ function App() {
     })
 
   }, [])
+
+  
 
   //Acá se comprueba que el usuario ha iniciado sesión y que sus datos se encuentrar en el localStorage
 
@@ -34,8 +36,10 @@ function App() {
     }
   },[setUser])
 
+  //----Antes de refactorizar el agregar una nota
 
-  const addNote = (e) => {
+  /**
+    const addNote = (e) => {
     e.preventDefault()
     const noteObject = {
       content: newNote,
@@ -47,8 +51,15 @@ function App() {
         setNotes([...notes, noteCreated]);
         setNewNote("");
       })
-
-
+   } 
+   */
+   //Refactorizando-code, separando el servicio del controlador de eventos que envía el formulario en el componente addNoteForm, el manejador en ese componente se llama addNote y dentro de ese, se llama la función de abajo, la cual se pasa por props con el nombre de createNote = {addNote} y se consume en el hijo, en el manejador.
+  const addNote = (noteObject) => {
+      noteService
+      .create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+      })
   }
 
   const toggleImportanceOf = (id) =>{
@@ -69,10 +80,6 @@ function App() {
             setNotes(notes.filter(n => n.id !== id))
             }
         )
-  }
-
-  const handleNoteChange = (e) => {
-    setNewNote(e.target.value)
   }
 
   const handleDeleteNote = (id) =>{
@@ -106,9 +113,7 @@ function App() {
       <h1>Notes✍🏾</h1>
       {user === null 
       ? <LoginForm/>
-      : <div>
-          <p>{user.name} logged-in</p>
-        </div> 
+      : <HeaderUserInfo/>
       }
       <Notification message={errorMessage}/>
       <div className='mt-3'>
@@ -123,7 +128,7 @@ function App() {
           return <Note key={note.id} note={note} toggleImportance={()=> toggleImportanceOf(note.id)} handleDeleteNote={handleDeleteNote} />
         })}
       </ul>
-      {user !== null && <AddNoteForm addNote={addNote} handleNoteChange={handleNoteChange} newNote={newNote} />}
+      {user !== null && <AddNoteForm createNote={addNote} />}
     </div>
   )
 }

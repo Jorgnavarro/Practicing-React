@@ -1,9 +1,27 @@
-
+import { useState } from "react";
 /* eslint-disable react/prop-types */
-export const AddNoteForm = ({ addNote, handleNoteChange, newNote }) => {
+export const AddNoteForm = ({ createNote }) => {
+    const [newNote, setNewNote] = useState("");
+
+
+    const handleNoteChange = (e) => {
+        setNewNote(e.target.value)
+    }
+    
+
+    const addNote = (e) => {
+        e.preventDefault()
+        createNote({
+          content: newNote,
+          date: new Date(),
+          important: Math.random() < 0.5,
+        })
+        
+        setNewNote("")
+      }
 
     return (
-        <form onSubmit={(e) => addNote(e)} className="containerAddNote">
+        <form onSubmit={addNote} className="containerAddNote">
             <div className='row align-items-center'>
                 <div className="col-9">
                     <input type="text"
