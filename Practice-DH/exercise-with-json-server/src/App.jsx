@@ -7,6 +7,7 @@ import { ContextGlobal } from './context/globalContext';
 import { LoginForm } from './components/LoginForm'
 import { AddNoteForm } from './components/AddNoteForm'
 import { HeaderUserInfo } from './components/HeaderUserInfo'
+import Togglable  from './components/Togglable'
 
 
 function App() {
@@ -112,7 +113,9 @@ function App() {
     <div className="containerApp">
       <h1>Notes✍🏾</h1>
       {user === null 
-      ? <LoginForm/>
+      ? <Togglable buttonLabel={"Log-in"}>
+        <LoginForm/>
+        </Togglable>
       : <HeaderUserInfo/>
       }
       <Notification message={errorMessage}/>

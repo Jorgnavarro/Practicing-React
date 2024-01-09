@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ContextGlobal } from '../context/globalContext'
 import loginService from '../services/login'
 import noteService from '../services/note'
@@ -10,9 +10,6 @@ import noteService from '../services/note'
 //window.localStorage.setItem('loggedUserNotes', JSON.stringify(user))
 export function LoginForm() {
 const {setErrorMessage, username, setUsername, setUser, password, setPassword} = useContext(ContextGlobal)
-const [loginVisible, setLoginVisible] = useState(false)
-const hideWhenVisible = { display: loginVisible?'none': ''}
-const showWhenVisible = { display: loginVisible?'':'none'}
 
 
 const handleLogin = async (event) => {
@@ -38,11 +35,8 @@ const handleLogin = async (event) => {
 
     //El estado de la aplicación tiene los campos username y password para almacenar los datos del formulario. Los campos de formulario tienen controladores de eventos, que sincronizan cambios en el campo con el estado del componente. Los controladores de eventos son simples, se les da un objeto como parámetro, y desestructuran el campo target del objeto y guardan su valor en el estado. Por ello, la sintaxis onChange = {({target}) => setUsername(target.value)}
     return (
-      <div className='containerForm'>
-        <div style={hideWhenVisible}>
-          <button onClick={()=>setLoginVisible(true)}>Log in</button>
-        </div>
-        <form onSubmit={handleLogin} id='loginForm' className="mb-3" style={showWhenVisible}>
+      
+      <form onSubmit={handleLogin} className="mb-3">
             <div className="mb-3">
                 <label htmlFor="username" className="form-label">Username</label>
                 <input
@@ -68,9 +62,50 @@ const handleLogin = async (event) => {
                 <button type='submit'>Login</button>
             </div>
         </form>
-        <div className='mb-3'>
-          <button onClick={()=> setLoginVisible(false)}>Hide login form</button>
-        </div>
-      </div>
     )
 }
+/*
+La de abajo fue la primera forma antes de incluir el togglable
+Para que este código pueda funcionar se deben agregar los estados:
+
+    const [loginVisible, setLoginVisible] = useState(false)
+    -------Estilos directos---------
+    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible ? '' : 'none' }
+    --------------
+    Al cambiar el estado visible, cambia el seteo de la propiedad, display, la cual si es "none", ocultará al elemento y en caso de ser undefined, tomará la propiedad default.
+*/
+// <div className='containerForm'>
+      //   <div style={hideWhenVisible}>
+      //     <button onClick={()=>setLoginVisible(true)}>Log in</button>
+      //   </div>
+      //   <form onSubmit={handleLogin} id='loginForm' className="mb-3" style={showWhenVisible}>
+      //       <div className="mb-3">
+      //           <label htmlFor="username" className="form-label">Username</label>
+      //           <input
+      //               type="text"
+      //               className="form-control"
+      //               id="username"
+      //               placeholder="Write your username here..."
+      //               value={username}
+      //               onChange={({ target }) => setUsername(target.value)}
+      //           />
+      //       </div>
+      //       <div className="mb-3">
+      //           <label htmlFor="inputPassword" className="form-label">Password</label>
+      //           <input
+      //               type='password'
+      //               className="form-control"
+      //               id="inputPassword"
+      //               value={password}
+      //               onChange={({ target }) => setPassword(target.value)}
+      //           />
+      //       </div>
+      //       <div>
+      //           <button type='submit'>Login</button>
+      //       </div>
+      //   </form>
+      //   <div className='mb-3'>
+      //     <button onClick={()=> setLoginVisible(false)}>Hide login form</button>
+      //   </div>
+      // </div>
