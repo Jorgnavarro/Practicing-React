@@ -36,7 +36,7 @@ const handleLogin = async (event) => {
     //El estado de la aplicación tiene los campos username y password para almacenar los datos del formulario. Los campos de formulario tienen controladores de eventos, que sincronizan cambios en el campo con el estado del componente. Los controladores de eventos son simples, se les da un objeto como parámetro, y desestructuran el campo target del objeto y guardan su valor en el estado. Por ello, la sintaxis onChange = {({target}) => setUsername(target.value)}
     return (
       
-      <form onSubmit={handleLogin} className="mb-3">
+      <form onSubmit={handleLogin} id="loginForm" className="mb-3">
             <div className="mb-3">
                 <label htmlFor="username" className="form-label">Username</label>
                 <input

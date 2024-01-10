@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { Note } from './components/Note';
 import noteService from './services/note.js';
 import { Notification } from './components/Notification';
@@ -14,6 +14,9 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [showAll, setShowAll] = useState(true);
   const {errorMessage, setErrorMessage, setUser, user} = useContext(ContextGlobal)
+  //Vamos a tomar la función que setea la visibilidad de los componentes en el Togglable, en este caso la función es ToggleVisibility
+  //Lo que queremos lograr es que al momento de crear una nueva nota, se oculte el formulario.
+  const noteFormRef = useRef()
   
   useEffect(() => {
     console.log("effect");
@@ -55,7 +58,10 @@ function App() {
    } 
    */
    //Refactorizando-code, separando el servicio del controlador de eventos que envía el formulario en el componente addNoteForm, el manejador en ese componente se llama addNote y dentro de ese, se llama la función de abajo, la cual se pasa por props con el nombre de createNote = {addNote} y se consume en el hijo, en el manejador.
+  
+  //al usar el useRef, este es el último paso, hacemos uso de la función dentro del otro componente con la sintaxis noteFormRef.current.toggleVisibility(), al crear una nueva nota, cuando se renderice el componente, visible será false y se ocultará el formulario para crear una nota
   const addNote = (noteObject) => {
+      noteFormRef.current.toggleVisibility()
       noteService
       .create(noteObject)
       .then(returnedNote => {
@@ -113,8 +119,8 @@ function App() {
     <div className="containerApp">
       <h1>Notes✍🏾</h1>
       {user === null 
-      ? <Togglable buttonLabel={"Log-in"}>
-        <LoginForm/>
+      ? <Togglable buttonLabel="Log-in" className="containerForm">
+          <LoginForm/>
         </Togglable>
       : <HeaderUserInfo/>
       }
@@ -131,7 +137,13 @@ function App() {
           return <Note key={note.id} note={note} toggleImportance={()=> toggleImportanceOf(note.id)} handleDeleteNote={handleDeleteNote} />
         })}
       </ul>
-      {user !== null && <AddNoteForm createNote={addNote} />}
+      {/*Acá consumimos el useRef, le pasamos noteFormRef que ya
+        iniciamos arriba por props al componente Togglable
+       */}
+      {user !== null && <Togglable className="containerAddNote" buttonLabel="Create a new note" ref={noteFormRef}>
+                          <AddNoteForm createNote={addNote}/> 
+                        </Togglable>
+      }
     </div>
   )
 }

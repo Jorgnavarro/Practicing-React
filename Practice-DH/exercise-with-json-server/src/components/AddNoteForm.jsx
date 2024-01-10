@@ -15,6 +15,7 @@ export const AddNoteForm = ({ createNote }) => {
     //     date: new Date(),
     //     important: Math.random() < 0.5,
     //    })
+
     const addNote = (e) => {
         e.preventDefault()
         createNote({
@@ -27,7 +28,7 @@ export const AddNoteForm = ({ createNote }) => {
       }
 
     return (
-        <form onSubmit={addNote} className="containerAddNote">
+        <form onSubmit={addNote} id="createNote" >
             <div className='row align-items-center'>
                 <div className="col-9">
                     <input type="text"
