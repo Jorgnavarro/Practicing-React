@@ -5,7 +5,7 @@ export function Note({note, toggleImportance, handleDeleteNote}){
         'make not important': 'make important';
 
     return(
-        <li className="mt-1">
+        <li className="mt-1 note">
             {note.content}
             <button className="mx-2" onClick={toggleImportance}>{label}</button>
             <button className="btn btn-danger" onClick={()=>handleDeleteNote(note.id)}>Delete</button>

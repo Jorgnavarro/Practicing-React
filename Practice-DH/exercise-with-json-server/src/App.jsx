@@ -4,7 +4,7 @@ import { Note } from './components/Note';
 import noteService from './services/note.js';
 import { Notification } from './components/Notification';
 import { ContextGlobal } from './context/globalContext';
-import { LoginForm } from './components/LoginForm'
+import LoginForm  from './components/LoginForm'
 import { AddNoteForm } from './components/AddNoteForm'
 import { HeaderUserInfo } from './components/HeaderUserInfo'
 import Togglable  from './components/Togglable'
