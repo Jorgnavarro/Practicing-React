@@ -8,7 +8,7 @@ import noteService from '../services/note'
 
 //Los valores guardados en el almacenamiento son DOMstrings, por lo que no podemos guardar un objeto Javascript tal cual. El objeto debe analizarse primero en JSON, con el método JSON.stringify. En consecuencia, cuando se lee un objeto JSON del almacenamiento local, debe parsearse de nuevo a Javascript con JSON.parse.
 //window.localStorage.setItem('loggedUserNotes', JSON.stringify(user))
-export function LoginForm() {
+const LoginForm = () => {
 const {setErrorMessage, username, setUsername, setUser, password, setPassword} = useContext(ContextGlobal)
 
 
@@ -64,6 +64,8 @@ const handleLogin = async (event) => {
         </form>
     )
 }
+
+export default LoginForm
 /*
 La de abajo fue la primera forma antes de incluir el togglable
 Para que este código pueda funcionar se deben agregar los estados:
