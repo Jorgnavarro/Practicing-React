@@ -73,7 +73,7 @@ test('clicking the button calls event handler once', () => {
         content: 'Component testing is done with react-testing-library',
         important: true
     }
-    //funciones simuladas, le permiten probar los vinculos
+    //funciones simuladas, le permiten probar los vinculos entre el código borrando la implementación real de una función, capturando instancias de funciones constructoras cuando se crean instancias con new y permitiendo la configuración en tiempo de prueba de valores de retorno.
 
     const mockHandler = vi.fn()
 
@@ -81,8 +81,10 @@ test('clicking the button calls event handler once', () => {
         <Note note={note} toggleImportance={mockHandler} />
     )
 
+    // La prueba encuentra el btn basado en el texto del componente renderizado y hace click en el elemento
     const btn = component.getByText('make not important')
+    //el click ocurre con el método fireEvent
     fireEvent.click(btn)
-
+    //el expect de la prueba verifica que la función simulada se haya llamado exactamente una vez.
     expect(mockHandler.mock.calls).toHaveLength(1)
 })
