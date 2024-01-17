@@ -9,7 +9,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server -p3001 --watch db.json",
-    "test": "vitest --ui"
+    "test": "vitest --ui",
+    "coverage": "vitest run --coverage"
   },
   "proxy": "http://localhost:3001",
   "dependencies": {
@@ -25,6 +26,7 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
+    "@vitest/coverage-v8": "^1.2.0",
     "@vitest/ui": "^1.2.0",
     "eslint": "^8.45.0",
     "eslint-plugin-jest": "^27.6.3",

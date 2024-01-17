@@ -29,12 +29,14 @@ const Togglable = forwardRef( (props, refs) => {
     //En ese sentido todo lo que se incorpore dentro del componente <Togglable></Togglable> se tratará como props.children, esto se usa para hacer referencia a los componentes hijos del componente.
     //A diferencia de los props normales, React agrega automáticamente children y siempre existe.
     //Cuando un componente tiene una etiqueta con autocierre, significa que props.children será un array vacío <Component/>
+
+    //className added togglableContentTest para testear
     return(
         <div>
             <div style={hideWhenVisible}>
                 <button onClick={toggleVisibility}>{ props.buttonLabel }</button>
             </div>
-            <div className={`${props.className} togglableContent`} style={showWhenVisible}>
+            <div className={`${props.className} togglableContentTest`} style={showWhenVisible}>
                 {props.children}
             </div>
             <div style={showWhenVisible} className='mb-3'>

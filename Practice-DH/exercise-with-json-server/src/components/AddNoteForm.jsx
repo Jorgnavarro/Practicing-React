@@ -26,9 +26,10 @@ export const AddNoteForm = ({ createNote }) => {
         
         setNewNote("")
       }
+      //className "formTest" agregado para poder hacer test
 
     return (
-        <form onSubmit={addNote} id="createNote" >
+        <form onSubmit={addNote} id="createNote" className="formTest" >
             <div className='row align-items-center'>
                 <div className="col-9">
                     <input type="text"
