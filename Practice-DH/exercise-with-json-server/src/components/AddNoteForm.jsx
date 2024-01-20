@@ -21,7 +21,7 @@ export const AddNoteForm = ({ createNote }) => {
         createNote({
           content: newNote,
           date: new Date(),
-          important: Math.random() < 0.5,
+          important: false,
         })
         
         setNewNote("")
@@ -37,6 +37,7 @@ export const AddNoteForm = ({ createNote }) => {
                         onChange={(e) => handleNoteChange(e)}
                         value={newNote}
                         placeholder="Write a new note here..."
+                        id="addNote"
                     />
                 </div>
                 <div className="col-auto">
