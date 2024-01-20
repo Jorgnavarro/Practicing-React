@@ -3,9 +3,8 @@ import '@testing-library/jest-dom'
 
 import { render, fireEvent } from '@testing-library/react'
 
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 
-import { vi } from 'vitest';
 
 
 //Permite buscar una parte más pequeña del componente e imprimir el código HTML

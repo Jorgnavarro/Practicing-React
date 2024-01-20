@@ -59,7 +59,7 @@ const handleLogin = async (event) => {
                 />
             </div>
             <div>
-                <button type='submit'>Login</button>
+                <button id='loginBtn' type='submit'>Login</button>
             </div>
         </form>
     )
