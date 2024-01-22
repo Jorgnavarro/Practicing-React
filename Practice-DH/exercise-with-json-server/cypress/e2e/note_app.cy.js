@@ -1,6 +1,10 @@
 describe('Note app', function(){
 
   beforeEach(function(){
+
+    //este comando abre la dirección web que se asigna como parámetro en el navegador usado por la prueba
+    cy.visit('http://localhost:5173')
+
     //Acá se está controlando el estado de la BBDD y accedemos a la BBDD de test que creamos en nuestro back, creamos el controlador y escribimos en el archivo principal del back una condición, que si se ejecuta el back en npm run start:test, se acceda a esa BBDD, la misma se resetea y nos permite agregar el contenido que estamos creando para nuestros tests y la BBDD principal no sufre ningún cambio.
     //con cy.request, hacemos solicitudes http
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
@@ -10,10 +14,8 @@ describe('Note app', function(){
       username: 'Programmer',
       password: 'fullstack'
     }
-    cy.request('POST', 'http://localhost:3001/api/users', user)
+    cy.request('POST', 'http://localhost:3001/api/users/', user)
 
-    //este comando abre la dirección web que se asigna como parámetro en el navegador usado por la prueba
-    cy.visit('http://localhost:5173')
   })
 
   //it.only se agrega para probar hasta este test, sin correr los siguientes, hasta que se considere que el test está listo se usa it, normal
