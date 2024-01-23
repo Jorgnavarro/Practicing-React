@@ -37,6 +37,7 @@ function App() {
       const user = JSON.parse(loggeUserJSON)
       setUser(user)
       noteService.setToken(user.token)
+      console.log(user)
     }
   },[setUser])
 
