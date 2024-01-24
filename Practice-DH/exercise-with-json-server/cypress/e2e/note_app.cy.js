@@ -151,6 +151,8 @@ describe('Note app', function () {
         // cy.contains('refactoring coding test with Commands, cypress').parent().find('button')
         //   .should('contain', 'make not important')
       })
+
+      //con la prueba de abajo podemos comprobar cuántos botones están presentes.
       it('then example', function() {
         cy.get('button').then( buttons => {
           console.log('number of buttons', buttons.length)

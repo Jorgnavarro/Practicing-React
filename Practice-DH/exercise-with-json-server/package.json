@@ -11,7 +11,8 @@
     "server": "json-server -p3001 --watch db.json",
     "test": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "test:e2e" : "cypress run"
   },
   "proxy": "http://localhost:3001",
   "dependencies": {
