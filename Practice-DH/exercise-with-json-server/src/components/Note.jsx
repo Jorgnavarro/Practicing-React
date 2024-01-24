@@ -6,7 +6,7 @@ export function Note({note, toggleImportance, handleDeleteNote}){
 
     return(
         <li className="mt-1 note">
-            {note.content}
+            <span>{note.content}</span>
             <button className="mx-2" onClick={toggleImportance}>{label}</button>
             <button className="btn btn-danger" onClick={()=>handleDeleteNote(note.id)}>Delete</button>
         </li>
