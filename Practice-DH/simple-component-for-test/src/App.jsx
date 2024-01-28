@@ -1,6 +1,7 @@
 
 import './App.css'
 import { ShowMoreInfo } from './components/ShowMoreInfo'
+import Counter from './components/Counter'
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
       <ShowMoreInfo  title="Show more information">
         More information, more power...
       </ShowMoreInfo>
+      <Counter/>
     </>
   )
 }
