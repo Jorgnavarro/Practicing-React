@@ -60,3 +60,22 @@ store.dispatch({
     id: 2
   }
 })
+
+const generateId = () => {
+  return Number((Math.random() * 1000000).toFixed(0))
+}
+
+//esta funcion al tomar el content del input envía el objeto al dispatch, así queda nuestro código más prolijo y nuestra app no tiene que mostrar la información que se setea al store del reducer
+export const createNote = (content) => ({
+  type: 'NEW_NOTE',
+  data: {
+    content,
+    important: false,
+    id: generateId()
+  }
+})
+
+export const toggleImportanceOf = (id) => ({
+  type: 'TOGGLE_IMPORTANCE',
+  data: { id }
+})
