@@ -57,10 +57,28 @@ function App() {
   //}
 
   //Podemos acceder el contenido de la nueva nota directamente desde el campo del formulario. Debido a que el campo tiene un nuevo nombre  <input name="note"/>, podemos acceder al contenido a través del objeto de evento e.target.note.value
+  const filterSelected = (value) => {
+    console.log(value)
+  }
+  
   return (
     <div>
         {/*-----version with components----*/}
         <NewNote/>
+        <div className='containerFilters'>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="filter" id="radioAll" onChange={() => filterSelected('ALL')} />
+            <label className="form-check-label" htmlFor="radioAll">All</label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="filter" id="radioImportant" onChange={() => filterSelected('IMPORTANT')} />
+            <label className="form-check-label" htmlFor="radioImportant">Important</label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="filter" id="radioNonImportant" onChange={() => filterSelected('NONIMPORTANT')}/>
+            <label className="form-check-label" htmlFor="radioNonImportant">Non important</label>
+          </div>
+        </div>
         <Notes/>
         {/*-----version without components----*/}
         {/* <form onSubmit={addNote} id="createNote" className="formTest" >

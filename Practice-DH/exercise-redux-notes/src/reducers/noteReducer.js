@@ -1,6 +1,22 @@
 import { createStore } from 'redux'
 
-export const noteReducer = (state = [], action) => {
+
+const initialState = [
+  {
+    content: 'The app state is in redux store',
+    important: true,
+    id: 1
+  },
+  {
+    content: 'State changes are made with actions',
+    important: false,
+    id: 2
+  }
+]
+
+
+
+export const noteReducer = (state = initialState, action) => {
   //---------First version with if-----
   //if(action.type === 'NEW_NOTE'){
     //Al utilizar el push la aplicación parece estar funcionando, pero este reducer está mal porque rompe el supuesto básico de que estas funciones deben ser puras. 
@@ -43,23 +59,27 @@ export const noteReducer = (state = [], action) => {
 
 export const store = createStore(noteReducer)
 
-store.dispatch({
-  type: 'NEW_NOTE', 
-  data: {
-    content: 'The app state is in redux store',
-    important: true,
-    id: 1
-  }
-})
+//-------------seteado manual en el store, sin estado inicial
 
-store.dispatch({
-  type: 'NEW_NOTE', 
-  data: {
-    content: 'State changes are made with actions',
-    important: false,
-    id: 2
-  }
-})
+// store.dispatch({
+//   type: 'NEW_NOTE', 
+//   data: {
+//     content: 'The app state is in redux store',
+//     important: true,
+//     id: 1
+//   }
+// })
+
+// store.dispatch({
+//   type: 'NEW_NOTE', 
+//   data: {
+//     content: 'State changes are made with actions',
+//     important: false,
+//     id: 2
+//   }
+// })
+
+//--------------------------------------
 
 const generateId = () => {
   return Number((Math.random() * 1000000).toFixed(0))
