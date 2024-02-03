@@ -1,4 +1,7 @@
-import { createStore } from 'redux'
+
+
+//Al combinar reducers, no necesitamos crear un store por cada reducer, así que se comenta el import createStore, porque ahora se hace de forma global, explicación file main.jsx
+//import { createStore } from 'redux'
 
 
 const initialState = [
@@ -16,7 +19,8 @@ const initialState = [
 
 
 
-export const noteReducer = (state = initialState, action) => {
+
+const noteReducer = (state = initialState, action) => {
   //---------First version with if-----
   //if(action.type === 'NEW_NOTE'){
     //Al utilizar el push la aplicación parece estar funcionando, pero este reducer está mal porque rompe el supuesto básico de que estas funciones deben ser puras. 
@@ -55,9 +59,13 @@ export const noteReducer = (state = initialState, action) => {
   }
 }
 
+export default noteReducer
+
 //IMPORTANTE: un estado reducer debe estar compuesto por objetos inmutables. Si hay un cambio en el estado, el objeto antiguo no se cambia, sino que se reemplaza por un objeto nuevo modificado. Esto es exactamente lo que se hace arriba con el nuevo reducer: el array anterior se reemplaza por el nuevo
 
-export const store = createStore(noteReducer)
+//-------------Después de combinar los reducers, no necesitamos crear un store individual para cada reducer, la explicación está en el file main.jsx, por eso se comenta el export const store
+
+//export const store = createStore(noteReducer)
 
 //-------------seteado manual en el store, sin estado inicial
 
