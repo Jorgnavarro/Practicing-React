@@ -27,8 +27,8 @@ store.subscribe(() => console.log(store.getState()))
 
 //Usamos el dispatch para observar el comportamiento del store con dos reducers, cambiamos el estado del filtro y simulamos la creación de una nueva nota, el estado del store se registra en la consola después de cada cambio que se realiza en el store
 
-store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers forms one reducer from manu simple reducers'))
+// store.dispatch(filterChange('IMPORTANT'))
+// store.dispatch(createNote('combineReducers forms one reducer from manu simple reducers'))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
