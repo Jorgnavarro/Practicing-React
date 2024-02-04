@@ -1,4 +1,3 @@
-import { createStore } from 'redux'
 
 //Función reducer, contiene todas las acciones que se ejecutarán cuando una acción específica cambie. Casi siempre las acciones modifican los estados
 const filterReducer = (state = "ALL", action) => {

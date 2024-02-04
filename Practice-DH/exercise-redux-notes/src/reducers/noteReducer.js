@@ -1,8 +1,8 @@
+import { createSlice } from "@reduxjs/toolkit"
 
 
 //Al combinar reducers, no necesitamos crear un store por cada reducer, así que se comenta el import createStore, porque ahora se hace de forma global, explicación file main.jsx
 //import { createStore } from 'redux'
-
 
 const initialState = [
   {
@@ -17,10 +17,48 @@ const initialState = [
   }
 ]
 
+const generateId = () => {
+  return Number((Math.random() * 1000000).toFixed(0))
+}
+
+//El parámetro name de la función createSlice define el prefijo que se utiliza en los valores de tipo de la acción. Por ejemplo, la acción createNote definida más adelante tendrán el valor de tipo notes/createNote. Es una buena práctica dar al parámetro un valor que sea único entre los reducers. De esta forma no habrá colisiones inesperadas entre los valores de tipo de acción de la aplicación. El parámetro "initialState" define el estado inicial del reducer. El parámetro reducers toma el propio reducer como un objeto, cuyas funciones manejan los cambios de estado causados por ciertas acciones. Tenga en cuenta que action.payload en la función contiene el argumento proporcionado al llamar al creador de la acción.
+
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    createNote( state, action ){
+      const content = action.payload
+      state.push({
+        content, 
+        important: false,
+        id: generateId()
+      })
+    },
+    toggleImportanceOf( state, action ){
+      const id = action.payload
+      const noteToChange = state.find(n => n.id === id)
+        const changedNote = {
+            ...noteToChange,
+            important: !noteToChange.important
+        }
+        return state.map(note => 
+            note.id !== id ? note : changedNote
+        )
+    }
+  }
+
+})
+
+export const { createNote, toggleImportanceOf } = noteSlice.actions
+
+export default noteSlice.reducer
 
 
+//------------------------------Primera versión del Reducer que incluye la función "noteReducer"
+//----------------------------- createNote y toggleImportanceOf de forma separada
 
-const noteReducer = (state = initialState, action) => {
+//const noteReducer = (state = initialState, action) => {
   //---------First version with if-----
   //if(action.type === 'NEW_NOTE'){
     //Al utilizar el push la aplicación parece estar funcionando, pero este reducer está mal porque rompe el supuesto básico de que estas funciones deben ser puras. 
@@ -35,31 +73,31 @@ const noteReducer = (state = initialState, action) => {
     
   //}
   //return state
-
+  
   //--------Second version more complex with switch-----
-  switch(action.type){
-    case 'NEW_NOTE':
+  //switch(action.type){
+   // case 'NEW_NOTE':
         //---------version with concat
         //return state.concat(action.data)
         //------version with spread operator
-        return [...state, action.data]
+   //     return [...state, action.data]
         
-    case 'TOGGLE_IMPORTANCE':
-        const id = action.data.id
-        const noteToChange = state.find(n => n.id === id)
-        const changedNote = {
-            ...noteToChange,
-            important: !noteToChange.important
-        }
-        return state.map(note => 
-            note.id !== id ? note : changedNote
-        )
-    default: 
-        return state
-  }
-}
+//     case 'TOGGLE_IMPORTANCE':
+//         const id = action.data.id
+//         const noteToChange = state.find(n => n.id === id)
+//         const changedNote = {
+//             ...noteToChange,
+//             important: !noteToChange.important
+//         }
+//         return state.map(note => 
+//             note.id !== id ? note : changedNote
+//         )
+//     default: 
+//         return state
+//   }
+// }
 
-export default noteReducer
+//export default noteReducer
 
 //IMPORTANTE: un estado reducer debe estar compuesto por objetos inmutables. Si hay un cambio en el estado, el objeto antiguo no se cambia, sino que se reemplaza por un objeto nuevo modificado. Esto es exactamente lo que se hace arriba con el nuevo reducer: el array anterior se reemplaza por el nuevo
 
@@ -89,21 +127,19 @@ export default noteReducer
 
 //--------------------------------------
 
-const generateId = () => {
-  return Number((Math.random() * 1000000).toFixed(0))
-}
 
 //esta funcion al tomar el content del input envía el objeto al dispatch, así queda nuestro código más prolijo y nuestra app no tiene que mostrar la información que se setea al store del reducer
-export const createNote = (content) => ({
-  type: 'NEW_NOTE',
-  data: {
-    content,
-    important: false,
-    id: generateId()
-  }
-})
+// export const createNote = (content) => ({
+//   type: 'NEW_NOTE',
+//   data: {
+//     content,
+//     important: false,
+//     id: generateId()
+//   }
+// })
 
-export const toggleImportanceOf = (id) => ({
-  type: 'TOGGLE_IMPORTANCE',
-  data: { id }
-})
+// export const toggleImportanceOf = (id) => ({
+//   type: 'TOGGLE_IMPORTANCE',
+//   data: { id }
+// })
+
