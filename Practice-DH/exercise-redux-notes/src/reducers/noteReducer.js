@@ -42,6 +42,11 @@ const noteSlice = createSlice({
             ...noteToChange,
             important: !noteToChange.important
         }
+        console.log(state)
+        //La salida obtenida por consola no se puede interpretar fácil, con ello, podemos ver la librería que usa Redux toolkit, la cual se implementa interamente para guardar el estado de la store
+        //Para poder hacer legible debemos convertirlo en una cadena y de nuevo en un objeto Javascript de la siguiente manera:
+        console.log(JSON.parse(JSON.stringify(state)))
+        
         return state.map(note => 
             note.id !== id ? note : changedNote
         )
@@ -49,6 +54,8 @@ const noteSlice = createSlice({
   }
 
 })
+
+//La función createSlice retorna un objeto que contiene el reducer así como los creadores de acciones definidos por parámetro "reducers". Se puede acceder al reducer mediante la propiedad noteSlice.reducer, mientras que a los creadores de acciones mediante la propiedad noteSlice.actions, desestructurando podemos aprovechar las importaciones en los otros archivos que hacíamos llamando directamente a los creadores de acciones, en este caso createNote y toggleImportanceOf
 
 export const { createNote, toggleImportanceOf } = noteSlice.actions
 
