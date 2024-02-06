@@ -3,12 +3,42 @@
     {
       "content": "the app state is in redux store",
       "important": true,
-      "id": 1
+      "id": "1"
     },
     {
       "content": "state changes are made with actions",
       "important": false,
-      "id": 2
+      "id": "2"
+    },
+    {
+      "id": "9be5",
+      "content": "If you think of something and can do it, then do it, btut don´t say it",
+      "important": false
+    },
+    {
+      "id": "e748",
+      "content": "Try hard, try again!!!",
+      "important": false
+    },
+    {
+      "id": "d76e",
+      "content": "GOGOGo Colombia <3",
+      "important": false
+    },
+    {
+      "id": "6b54",
+      "content": "I am not here!!!",
+      "important": false
+    },
+    {
+      "id": "612c",
+      "content": "Hola",
+      "important": false
+    },
+    {
+      "id": "1eaf",
+      "content": "God is love...",
+      "important": false
     }
   ]
 }

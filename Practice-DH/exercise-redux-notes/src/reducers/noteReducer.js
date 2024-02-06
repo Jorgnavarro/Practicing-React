@@ -28,12 +28,15 @@ const noteSlice = createSlice({
   initialState: [],
   reducers: {
     createNote( state, action ){
-      const content = action.payload
-      state.push({
-        content, 
-        important: false,
-        id: generateId()
-      })
+      //-----Versión sin hacer el post a json-server
+      // const content = action.payload
+      // state.push({
+      //   content, 
+      //   important: false,
+      //   id: generateId()
+      // })
+      //--------Cuando hacemos el post a json-server
+      state.push(action.payload)
     },
     toggleImportanceOf( state, action ){
       const id = action.payload
@@ -53,13 +56,16 @@ const noteSlice = createSlice({
     },
     appendNote( state, action ){
       state.push(action.payload)
+    },
+    setNotes( state, action ){
+      return action.payload
     }
   },
 })
 
 //La función createSlice retorna un objeto que contiene el reducer así como los creadores de acciones definidos por parámetro "reducers". Se puede acceder al reducer mediante la propiedad noteSlice.reducer, mientras que a los creadores de acciones mediante la propiedad noteSlice.actions, desestructurando podemos aprovechar las importaciones en los otros archivos que hacíamos llamando directamente a los creadores de acciones, en este caso createNote y toggleImportanceOf
 
-export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions
+export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlice.actions
 
 export default noteSlice.reducer
 
