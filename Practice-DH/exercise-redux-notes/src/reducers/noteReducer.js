@@ -4,18 +4,18 @@ import { createSlice } from "@reduxjs/toolkit"
 //Al combinar reducers, no necesitamos crear un store por cada reducer, así que se comenta el import createStore, porque ahora se hace de forma global, explicación file main.jsx
 //import { createStore } from 'redux'
 
-const initialState = [
-  {
-    content: 'The app state is in redux store',
-    important: true,
-    id: 1
-  },
-  {
-    content: 'State changes are made with actions',
-    important: false,
-    id: 2
-  }
-]
+// const initialState = [
+//   {
+//     content: 'The app state is in redux store',
+//     important: true,
+//     id: 1
+//   },
+//   {
+//     content: 'State changes are made with actions',
+//     important: false,
+//     id: 2
+//   }
+// ]
 
 const generateId = () => {
   return Number((Math.random() * 1000000).toFixed(0))
@@ -25,7 +25,7 @@ const generateId = () => {
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote( state, action ){
       const content = action.payload
@@ -50,14 +50,16 @@ const noteSlice = createSlice({
         return state.map(note => 
             note.id !== id ? note : changedNote
         )
+    },
+    appendNote( state, action ){
+      state.push(action.payload)
     }
-  }
-
+  },
 })
 
 //La función createSlice retorna un objeto que contiene el reducer así como los creadores de acciones definidos por parámetro "reducers". Se puede acceder al reducer mediante la propiedad noteSlice.reducer, mientras que a los creadores de acciones mediante la propiedad noteSlice.actions, desestructurando podemos aprovechar las importaciones en los otros archivos que hacíamos llamando directamente a los creadores de acciones, en este caso createNote y toggleImportanceOf
 
-export const { createNote, toggleImportanceOf } = noteSlice.actions
+export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions
 
 export default noteSlice.reducer
 
