@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useReducer } from "react"
+import { createContext, useContext, useReducer } from "react"
 
 //Acá estoy creando el contexto
 const CounterContext = createContext()
@@ -50,6 +50,18 @@ export const CounterContextProvider = (props) => {
 
 }
 
+//--------------------------Version 2 auxiliar functions
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const useCounterValue = () => {
+    const counterAndDispatch = useContext(CounterContext)
+    return counterAndDispatch[0]
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useCounterDispatch = () => {
+    const counterAndDispatch = useContext(CounterContext)
+    return counterAndDispatch[1]
+}
 
 export default CounterContext

@@ -1,13 +1,16 @@
-/* eslint-disable react/prop-types */
-import { useContext } from "react"
-import CounterContext from "../context/globalContext"
+
+// import { useContext } from "react"
+// import CounterContext from "../context/globalContext"
+import { useCounterDispatch } from "../context/globalContext"
 
 
+// eslint-disable-next-line react/prop-types
 const Btn = ({ type, label, className }) => {
 
-    // eslint-disable-next-line no-unused-vars
-    const [ counter, dispatch] = useContext(CounterContext)
-
+    //-----------version 1
+    //const [ counter, dispatch] = useContext(CounterContext)
+    //---------version with auxiliar functions
+    const dispatch = useCounterDispatch()
     return (
         <button className={className} type='button' onClick={() => dispatch({ type })}>{label}</button>
     )
