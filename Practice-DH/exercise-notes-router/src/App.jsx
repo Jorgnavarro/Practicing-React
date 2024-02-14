@@ -1,9 +1,28 @@
-//import { useState } from 'react'
+/* eslint-disable no-unused-vars */
+import { useState } from 'react'
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
 import Home from './routes/Home'
 import Users from './routes/Users'
 import Notes from './routes/Notes'
+import NoteDetail from '../components/NoteDetail'
+
+/*
+*Routing
+La representación condicional de componentes basada en URL en el navegador, se utiliza
+colocando componentes como hijos del componente Router, es decir, dentro de las etiquetas
+del Router (esto definido en el archivo main.jsx)
+
+BrowserRouter es un Router que usa la API de historial de HTML5 (pushState, replaceState y el evento popState)
+para mantener su interfaz de usuario sincronizada con la URL.
+
+Dentro del router definimos enlaces que modifican la barra de direcciones con la ayuda del componente Link
+crea un enlace en la aplicación con el texto notes, que cuando se clickea cambia la URL en la barra de direcciones a "/notes" en el siguiente caso: <Link to='/notes'>Notes</Link>
+*/
+
+
+
+
 
 // const Home = () =>  (
 //   <div> <h2>TKTL notes app</h2> </div>
@@ -38,6 +57,34 @@ function App() {
   //   }
   // }
 
+/*Los componentes renderizados según la URL del navegador se definen con la ayuda del componente Route
+
+<Route path='/notes' element={<Notes/>}/>
+*/
+
+const [notes, setNotes] = useState([
+  {
+    id: 1,
+    content: 'HTML is easy',
+    important: true,
+    user: 'Matti Luukkainen'
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    important: false,
+    user: 'Matti Luukkainen'
+  },
+  {
+    id: 3,
+    content: 'Most important methods of HTTP-protocol are GET and POST',
+    important: true,
+    user: 'Arto Hellas'
+  }
+])
+
+
+
 
   return (
     <div>
@@ -59,8 +106,13 @@ function App() {
       </div>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/notes' element={<Notes/>}/>
         <Route path='/users' element={<Users/>}/>
+        <Route path='/notes' element={<Notes notes={notes}/>}/>
+        {/*Abajo estamos definiendo un ruta parametrizada, el cual se marca después del "/" con dos puntos : 
+        seguido del nombre que queremos darle al parámetro /:id, esto podemos recuperarlo en cualquier componente
+        de nuestra aplicación usando useParams.id, si esto lo almacenamos en una variable, nos devolverá su valor
+        */}
+        <Route path='/notes/:id' element={<NoteDetail notes={notes}/>}/>
       </Routes>
       <div>
         {/* {content()} */}
