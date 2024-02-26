@@ -1,7 +1,7 @@
 const Home = () => {
 
     return(
-        <div>
+        <div className="containerHome">
             <h1>Welcome Notes APP</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex omnis magnam provident itaque architecto exercitationem illo sit beatae iure fugit doloremque consequatur deserunt eaque odio impedit, ullam, nam eveniet. Doloremque.
             Aut vitae soluta, eius delectus cum voluptatum, minima repudiandae quibusdam voluptatibus dolore itaque nulla magni architecto laborum, sed odit dignissimos! Molestias, ipsum? Neque pariatur incidunt corporis velit corrupti. Aliquam, in?

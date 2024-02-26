@@ -1,11 +1,84 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
   text-align: center;
+}
+
+.containerApp{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.navBar{
+  background-color: #33332D;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ulList{
   list-style: none;
   text-align: left;
+}
+
+.links{
+  color:  rgba(255, 255, 255, 0.87);
+}
+
+.links:hover{
+  color: #CBDDB5;
+}
+
+.containerHome{
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerListNotes{
+  height: 100%;
+  border: 1px black solid;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableNotes{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerNoteDetail{
+  width: 100vw;
+  height: 100%;
+}
+
+#loginForm{
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.containerInput{
+  width: 50%;
+}
+
+.footerText{
+  background-color: #33332D;
+  height: 10%;
+  display: flex;
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
 }
