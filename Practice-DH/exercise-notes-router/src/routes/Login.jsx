@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom"
+import { Form, Button } from "react-bootstrap"
 
 const Login = (props) => {
     const navigate = useNavigate()
@@ -11,29 +12,28 @@ const Login = (props) => {
     }
 
     return(
-        <form onSubmit={handleLogin} id="loginForm" className="mb-3">
-      <div className="mb-3 containerInput">
-        <label htmlFor="username" className="form-label">Username</label>
-        <input
+        <Form onSubmit={handleLogin} id="loginForm" className="mb-3">
+      <Form.Group className="containerInput mb-3">
+        <Form.Label htmlFor="username">Username: </Form.Label>
+        <Form.Control
           type="text"
-          className="form-control"
           id="username"
           placeholder="Write your username here..."
           
         />
-      </div>
-      <div className="mb-3 containerInput">
-        <label htmlFor="inputPassword" className="form-label">Password</label>
-        <input
+      </Form.Group>
+      <Form.Group className="mb-3 containerInput">
+        <Form.Label htmlFor="inputPassword" className="form-label">Password</Form.Label>
+        <Form.Control
           type='password'
           className="form-control"
           id="inputPassword"
         />
-      </div>
+      </Form.Group>
       <div>
-        <button id='loginBtn' type='submit'>Login</button>
+        <Button variant="light" id='loginBtn' type='submit'>Login</Button>
       </div>
-    </form>
+    </Form>
     )
 }
 

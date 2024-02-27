@@ -7,6 +7,7 @@ import Users from './routes/Users'
 import Notes from './routes/Notes'
 import NoteDetail from './components/NoteDetail'
 import Login from './routes/Login'
+import { Alert } from 'react-bootstrap'
 
 /*
 *Routing
@@ -66,8 +67,14 @@ function App() {
 
 const [user, setUser] = useState(null)
 
+const [message, setMessage] = useState(null)
+
 const login = (user) => {
   setUser(user)
+  setMessage(`Welcome ${user}`)
+  setTimeout(()=>{
+    setMessage(null)
+  }, 2000)
 }
 
 
@@ -121,6 +128,9 @@ const note = match
         : <Link className='p-2 links' to='/login' >Login</Link>
       }
       </div>
+      {(message && <Alert className='mt-3' variant='success'>
+        {message}
+      </Alert>)}
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login onLogin={login}/>}/>
