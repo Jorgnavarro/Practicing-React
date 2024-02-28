@@ -1,5 +1,21 @@
+import React, { useState } from 'react'
+
 const App = () => {
-    return null
+    const [counter, setCounter] = useState(0)
+    const [values, setValues] = useState([])
+
+    const handleClick = () => {
+        setCounter(counter + 1)
+        setValues(values.concat(counter))
+    }
+    return (
+        <div className='container'>
+            Hello webpack {counter} clicks
+            <button onClick={handleClick}>
+                press this button
+            </button>
+        </div>
+    )
 }
 
 export default App
