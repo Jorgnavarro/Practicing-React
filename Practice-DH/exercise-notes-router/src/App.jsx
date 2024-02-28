@@ -9,6 +9,7 @@ import NoteDetail from './components/NoteDetail'
 import Login from './routes/Login'
 import { Alert } from 'react-bootstrap'
 
+
 /*
 *Routing
 La representación condicional de componentes basada en URL en el navegador, se utiliza
