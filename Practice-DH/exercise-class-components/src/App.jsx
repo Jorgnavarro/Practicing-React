@@ -50,11 +50,24 @@ class App extends React.Component{
     Llamar al método setState siempre desencadena la re-renderización del componente de clase, es decir que 
     realiza nuevamente un llamado al método render
     */
+   try{
     axios.get('http://localhost:3001/anecdotes').then(response => {
       this.setState({
         anecdotes: response.data
       })
     })
+    .catch(e => {
+      console.error("No service available")
+      console.log(e.message)
+    })
+
+    if(this.state.anecdotes.length === 0){
+      throw "No service available"
+    }
+   }catch(error){
+      console.log(error)
+   }
+   
   }
 
   //Se define dentro del constructor para luego ser llamado dentro del método render(), como this.handleClick
