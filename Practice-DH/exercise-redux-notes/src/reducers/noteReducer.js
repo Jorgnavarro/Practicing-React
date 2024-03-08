@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+//---------Importamos noteService para usar redux-thunk
+import noteService from '../services/notes'
 
 //Al combinar reducers, no necesitamos crear un store por cada reducer, así que se comenta el import createStore, porque ahora se hace de forma global, explicación file main.jsx
 //import { createStore } from 'redux'
@@ -27,7 +28,7 @@ const noteSlice = createSlice({
   name: 'notes',
   initialState: [],
   reducers: {
-    createNote( state, action ){
+    //createNote( state, action ){
       //-----Versión sin hacer el post a json-server
       // const content = action.payload
       // state.push({
@@ -36,8 +37,8 @@ const noteSlice = createSlice({
       //   id: generateId()
       // })
       //--------Cuando hacemos el post a json-server
-      state.push(action.payload)
-    },
+      //state.push(action.payload)
+    //},
     toggleImportanceOf( state, action ){
       const id = action.payload
       const noteToChange = state.find(n => n.id === id)
@@ -65,7 +66,28 @@ const noteSlice = createSlice({
 
 //La función createSlice retorna un objeto que contiene el reducer así como los creadores de acciones definidos por parámetro "reducers". Se puede acceder al reducer mediante la propiedad noteSlice.reducer, mientras que a los creadores de acciones mediante la propiedad noteSlice.actions, desestructurando podemos aprovechar las importaciones en los otros archivos que hacíamos llamando directamente a los creadores de acciones, en este caso createNote y toggleImportanceOf
 
-export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlice.actions
+export const { appendNote, toggleImportanceOf, setNotes } = noteSlice.actions
+
+//---------------------Usando redux-thunk
+//Con Redux thunk, es posible implementar action creators que devuelven una función en lugar de un objeto. La función recibe los métodos dispatch y getState del store de Redux como parámetros. Esto permite, por ejemplo, implementaciones de creadores de acciones asincrónicas, que primero esperan la finalización de una cierta operación asincrónica y luego despachan alguna acción, que cambia el estado del store.
+
+export const initializeNotes = () => {
+  return async dispatch => {
+     const notes = await noteService.getAll()
+     dispatch(setNotes(notes))
+  }
+}
+
+export const createNote = (content) => {
+  return async dispatch => {
+    const newObject = {
+      content,
+      important: false
+    }
+    const newNote = await noteService.createNewNote(newObject)
+    dispatch(appendNote(newNote))
+  }
+}
 
 export default noteSlice.reducer
 

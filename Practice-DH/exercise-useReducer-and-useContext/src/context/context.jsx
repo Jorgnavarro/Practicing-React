@@ -5,6 +5,7 @@ export const AppContext = createContext();
 
 
 
+// eslint-disable-next-line react/prop-types
 const AppContextProvider = ({ children }) => {
     const [currentTheme, setCurrentTheme] = useState(
         localStorage.getItem('theme') || 'dark'

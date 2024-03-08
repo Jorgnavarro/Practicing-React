@@ -75,6 +75,7 @@ function bagReducer(state, action) {
 
 
 
+// eslint-disable-next-line react/prop-types
 const TheBagContextProvider = ({children}) =>{
     const [value, setValue] = useState('')
 

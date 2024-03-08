@@ -6,12 +6,7 @@ import {CounterContextProvider} from "./context/globalContext";
 
 /*
  * Después de crear el contexto debemos envolver el componente hijo dentro del componente CounterContext.Provider, se deben establecer los valores que serán consumidos por los hijos, el valor adecuado para el contexto
- 
  */
-
-
-
-
 
 
 

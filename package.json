@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Jorgnavarro/Practicing-React/issues"
   },
-  "homepage": "https://github.com/Jorgnavarro/Practicing-React#readme"
+  "homepage": "https://github.com/Jorgnavarro/Practicing-React#readme",
+  "dependencies": {
+    "nvm": "^0.0.4"
+  }
 }

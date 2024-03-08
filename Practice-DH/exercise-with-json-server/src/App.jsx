@@ -1,9 +1,9 @@
 import './App.css'
-import { useState, useEffect, useContext, useRef } from 'react';
-import { Note } from './components/Note';
-import noteService from './services/note.js';
-import { Notification } from './components/Notification';
-import { ContextGlobal } from './context/globalContext';
+import { useState, useEffect, useContext, useRef } from 'react'
+import { Note } from './components/Note'
+import noteService from './services/note.js'
+import { Notification } from './components/Notification'
+import { ContextGlobal } from './context/globalContext'
 import LoginForm  from './components/LoginForm'
 import { AddNoteForm } from './components/AddNoteForm'
 import { HeaderUserInfo } from './components/HeaderUserInfo'
@@ -11,19 +11,19 @@ import Togglable  from './components/Togglable'
 
 
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [showAll, setShowAll] = useState(true);
+  const [notes, setNotes] = useState([])
+  const [showAll, setShowAll] = useState(true)
   const {errorMessage, setErrorMessage, setUser, user} = useContext(ContextGlobal)
   //Vamos a tomar la función que setea la visibilidad de los componentes en el Togglable, en este caso la función es ToggleVisibility
   //Lo que queremos lograr es que al momento de crear una nueva nota, se oculte el formulario.
   const noteFormRef = useRef()
   
   useEffect(() => {
-    console.log("effect");
+    console.log('effect')
     noteService.getAll()
-    .then(initialNotes =>{
-        setNotes(initialNotes);
-    })
+      .then(initialNotes =>{
+        setNotes(initialNotes)
+      })
 
   }, [])
 
@@ -57,12 +57,12 @@ function App() {
       })
    } 
    */
-   //Refactorizando-code, separando el servicio del controlador de eventos que envía el formulario en el componente addNoteForm, el manejador en ese componente se llama addNote y dentro de ese, se llama la función de abajo, la cual se pasa por props con el nombre de createNote = {addNote} y se consume en el hijo, en el manejador.
+  //Refactorizando-code, separando el servicio del controlador de eventos que envía el formulario en el componente addNoteForm, el manejador en ese componente se llama addNote y dentro de ese, se llama la función de abajo, la cual se pasa por props con el nombre de createNote = {addNote} y se consume en el hijo, en el manejador.
   
   //al usar el useRef, este es el último paso, hacemos uso de la función dentro del otro componente con la sintaxis noteFormRef.current.toggleVisibility(), al crear una nueva nota, cuando se renderice el componente, visible será false y se ocultará el formulario para crear una nota
   const addNote = (noteObject) => {
-      noteFormRef.current.toggleVisibility()
-      noteService
+    noteFormRef.current.toggleVisibility()
+    noteService
       .create(noteObject)
       .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
@@ -70,42 +70,42 @@ function App() {
   }
 
   const toggleImportanceOf = (id) =>{
-      const note = notes.find(n => n.id === id);
-      const changedNote = {...note, important: !note.important}
+    const note = notes.find(n => n.id === id)
+    const changedNote = {...note, important: !note.important}
 
-      noteService.update(id, changedNote)
-        .then(updatedNote =>{
-            setNotes(notes.map( note => note.id !== id?note: updatedNote));
-        }).catch(error=>{
-            setErrorMessage(
-              `the note '${note.content}' was already deleted from server`
-            )
-            console.log(error);
-            setTimeout(() => {
-              setErrorMessage(null)
-            }, 5000)
-            setNotes(notes.filter(n => n.id !== id))
-            }
+    noteService.update(id, changedNote)
+      .then(updatedNote =>{
+        setNotes(notes.map( note => note.id !== id?note: updatedNote))
+      }).catch(error=>{
+        setErrorMessage(
+          `the note '${note.content}' was already deleted from server`
         )
+        console.log(error)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+        setNotes(notes.filter(n => n.id !== id))
+      }
+      )
   }
 
   const handleDeleteNote = (id) =>{
-      noteService.deleteNote(id)
-        .then(answer =>{
-            if(answer.status === 200){
-              console.log(`The note with id: ${id} was succesfully deleted`);
-            }
-        })
-        .catch(error =>{
-            console.log(error);
-            if(error.message === "Network Error"){
-                alert("Connection to the server has a problem, try again later...");
-            }
-        })
-      setNotes(notes.filter(n => n.id !== id))
+    noteService.deleteNote(id)
+      .then(answer =>{
+        if(answer.status === 200){
+          console.log(`The note with id: ${id} was succesfully deleted`)
+        }
+      })
+      .catch(error =>{
+        console.log(error)
+        if(error.message === 'Network Error'){
+          alert('Connection to the server has a problem, try again later...')
+        }
+      })
+    setNotes(notes.filter(n => n.id !== id))
   }
 
-  const notesToShow = showAll ? notes : notes.filter(note => note.important === true);
+  const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
 
   //Se implementan renderizados condicionales pero con una nueva sintaxis
   //en el primer renderizado  condicional, user === null ? <loginForm/> :
@@ -119,17 +119,17 @@ function App() {
     <div className="containerApp">
       <h1>Notes✍🏾</h1>
       {user === null 
-      ? <Togglable buttonLabel="Log-in" className="containerForm">
+        ? <Togglable buttonLabel="Log-in" className="containerForm">
           <LoginForm/>
         </Togglable>
-      : <HeaderUserInfo/>
+        : <HeaderUserInfo/>
       }
       <Notification message={errorMessage}/>
       <div className='mt-3'>
         <button onClick={() => {
           setShowAll(!showAll)
         }}>
-          Show {showAll ? "important notes🚨" : "all notes 📖"}
+          Show {showAll ? 'important notes🚨' : 'all notes 📖'}
         </button>
       </div>
       <ul className='list_notes mt-4'>
@@ -141,8 +141,8 @@ function App() {
         iniciamos arriba por props al componente Togglable
        */}
       {user !== null && <Togglable className="containerAddNote" buttonLabel="Create a new note" ref={noteFormRef}>
-                          <AddNoteForm createNote={addNote}/> 
-                        </Togglable>
+        <AddNoteForm createNote={addNote}/> 
+      </Togglable>
       }
     </div>
   )

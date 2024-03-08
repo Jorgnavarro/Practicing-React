@@ -5,17 +5,25 @@ import Notes from './components/Notes'
 import NewNote from './components/NewNote'
 import VisibiltyFilter from './components/VisibilityFilter'
 import { useEffect } from 'react'
-import { setNotes } from './reducers/noteReducer'
-import noteService from './services/notes'
+import { initializeNotes } from './reducers/noteReducer'
+//import noteService from './services/notes'
 import { useDispatch } from 'react-redux'
 
 
 function App() {
   const dispatch = useDispatch()
 
+  //---------Haciendo uso de promesas por default
+  // useEffect(()=> {
+  //   noteService
+  //     .getAll().then(notes => dispatch(setNotes(notes)))
+  // },[dispatch])
+
+  //-------Haciendo uso de redux-thunk
+  //En comparación con el useEffect de arriba, se está usando initializeNotes(), como función que contiene en el reducer lo que retorna la llamada sincrónica que se hace al backend para obtener los datos, en otras palabras, cargamos esa responsabilidad a nuestro reducer, para que el componente no tenga que ver con la comunicación entre el front y el back
+
   useEffect(()=> {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))
+    dispatch(initializeNotes())
   },[dispatch])
   
   

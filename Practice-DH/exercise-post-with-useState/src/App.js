@@ -13,7 +13,7 @@ function App() {
     const [status, setStatus] = useState(0);
 
     function totalLikes (){
-        setStatus((allLikes)=> allLikes + 1)
+        setStatus((allLikes) => allLikes + 1)
     }
   
   return (
