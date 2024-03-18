@@ -18,9 +18,9 @@ import noteService from '../services/notes'
 //   }
 // ]
 
-const generateId = () => {
-  return Number((Math.random() * 1000000).toFixed(0))
-}
+// const generateId = () => {
+//   return Number((Math.random() * 1000000).toFixed(0))
+// }
 
 //El parámetro name de la función createSlice define el prefijo que se utiliza en los valores de tipo de la acción. Por ejemplo, la acción createNote definida más adelante tendrán el valor de tipo notes/createNote. Es una buena práctica dar al parámetro un valor que sea único entre los reducers. De esta forma no habrá colisiones inesperadas entre los valores de tipo de acción de la aplicación. El parámetro "initialState" define el estado inicial del reducer. El parámetro reducers toma el propio reducer como un objeto, cuyas funciones manejan los cambios de estado causados por ciertas acciones. Tenga en cuenta que action.payload en la función contiene el argumento proporcionado al llamar al creador de la acción.
 
