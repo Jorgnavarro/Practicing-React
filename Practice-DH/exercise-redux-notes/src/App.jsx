@@ -93,7 +93,7 @@ export default App
   //Por otro lado useSelector, recibe una función como parámetro. La función busca o selecciona datos del store redux. Aquí necesitamos todas las notas por lo que nuestra función de selector devuelve el estado completo
   //const notes = useSelector(state => state)
   //Por lo general, las funciones de selector son un poco más interesantes y solo devuelven partes seleccionadas del contenido del store redux. Por ejemplo, podríamos devolver solo notas marcadas como importantes:
-  //const importantNotes = useSelector(state => state.filter(note => note.important))  
+  //const importantNotes = useSelector (state => state.filter(note => note.important))  
 
   //El método para agregar notas es simple, este envía la acción para agregar notas al reducer
   // const addNote = (e) => {

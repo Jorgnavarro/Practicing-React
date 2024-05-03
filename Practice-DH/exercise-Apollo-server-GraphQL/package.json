@@ -1,0 +1,15 @@
+{
+  "name": "exercise-apollo-server-graphql",
+  "version": "1.0.0",
+  "description": "Practice with GraphQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Navarro",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "graphql": "^16.8.1"
+  }
+}
