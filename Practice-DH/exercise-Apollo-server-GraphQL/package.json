@@ -4,12 +4,15 @@
   "description": "Practice with GraphQL",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server" : "nodemon index.js"
   },
   "author": "Luis Navarro",
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.10.4",
-    "graphql": "^16.8.1"
+    "graphql": "^16.8.1",
+    "nodemon": "^3.1.0",
+    "uuid": "^9.0.1"
   }
 }
