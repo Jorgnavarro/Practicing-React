@@ -81,6 +81,96 @@ Person, pero también recibe el parámetro phone: con valores "YES" O "NO", para
 Person que contenga la propiedad phone o no, dependiendo de lo descrito en el parámetro.
 y findPerson recibe un parámetro de cadena y devuelve un objeto Person
 */
+//---------------------------------------------------------------------------
+/*
+ *Objeto dentro de un Objeto
+Nuestro esquema ahora se ve así:
+
+type Address {
+  street: String!
+  city: String! 
+}
+
+type Person {
+  name: String!
+  phone: String
+  address: Address!
+  id: ID!
+}
+
+Por los que una persona ahora tiene el campo con el tipo Address, que contiene la calle y la ciudad. Las consultas que requieren
+la dirección cambian a: 
+
+query {
+  findPerson(name: "Arto Hellas") {
+    phone 
+    address {
+      city 
+      street
+    }
+  }
+}
+
+Y la respuesta de la consulta sería:
+{
+  "data": {
+    "findPerson": {
+      "phone": "040-123543",
+      "address":  {
+        "city": "Espoo",
+        "street": "Tapiolankatu 5 A"
+      }
+    }
+  }
+}
+
+*Todavía se guarda una persona en el servidor de la misma manera como se hacía antes
+Lo anterior indica que los obejtos de personas guardados en el servidor no son exactamente los mismos que los objetos del tipo Person GraphQL
+descritos en el esquema.
+
+A diferencia del tipo Person, el tipo Address no tiene un campo ID porque no se guardan en su propia estructura de datos en el servidor.
+
+*Debido a que los objetos guardados en la matriz no tienen un campo address, el resolver predeterminado no es suficiente
+Agregamos un resolver para el campo Address de tipo Person:
+
+const resolvers = {
+  //...
+  Person: {
+    address: (root) => {
+      return { 
+        street: root.street,
+        city: root.city
+      }
+    }
+  }
+}
+
+De esta forma cada vez que un objeto Person es devuelto, los campos name, phone e id se devuelve utilizando los resolvers predeterminados,
+pero el campo address se forma utilizando un resolver autodefinido. El parámetro root de la función de resolución es el objeto-persona, por lo que la calle
+y la ciudad de la dirección se pueden tomar de sus campos.
+ */
+
+/*
+ * Mutations
+Si queremos agregar una nueva persona  nuestra agenda. En GraphQL, en todas las operaciones que provocan un cambio se realizan con mutaciones.
+Las mutaciones se describen en el esquema como claves de tipo Mutation. Este es el esquema de una mutación para agregar una persona:
+
+type Mutation{
+  addPerson(
+    name: String!
+    phone: String
+    street: String!
+    city: String!
+  ): Person
+}
+
+A la mutación se le dan los detalles de la persona como parámetros. El parámetro phone es el único que admite valores NULL. La mutación 
+también tiene un valor de retorno. El valor de retorno es de tipo Person, la idea es que los detalles de la persona agregada
+se devuelvan si la operación es exitosa y si no, nula. El valor del campo id no se proporciona como parámetro. Es mejor dejar la generacióon de una
+identificación para el servidor.
+
+
+ */
 
 const resolvers = {
     Query: {
@@ -122,8 +212,8 @@ const resolvers = {
     }
 }
 
-/**
-* *Resolvers
+/*
+*Resolvers
 la consulta:
 query{
   findPerson(name: "Arto Hellas"){
@@ -139,7 +229,7 @@ tiene un resolver que se diferencia de los anteriores porque se dan 2 parámetro
 El segundo parámetro, args, contiene los parámetros de la consulta. El resolutor luego devuelve el arreglo *persons
 a la persona cuyo nombre es el mismo que el valor de *args.name. En este caso no se hace uso del primer parámetro.
 
-**No olvidar
+*No olvidar
 Todos los resolvers tienen 4 parámetros. Con Javascript los parámetros no tienen que estar definidos, si no son 
 necesarios.
 
@@ -160,7 +250,6 @@ Person: {
 el resolver pretedeterminado devuelve el valor del campo correspondiente del objeto. Se puede acceder al objeto en sí a través del primer
 parámetro del resolver *root
 */
-
 
 /* *
 *new ApolloServer({})
