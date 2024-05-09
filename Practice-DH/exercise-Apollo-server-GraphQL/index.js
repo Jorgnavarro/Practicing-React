@@ -1,9 +1,9 @@
-//Instalamos apollo server y graphql con "npm i @apollo-server graphql"
-
+//*Instalamos apollo server y graphql con "npm i @apollo-server graphql"
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
-//
+//* instalamos la librería que nos genera los id's "npm i uuidv4"
 const { v4: uuidv4 } = require('uuid')
+//*Podemos manejar los errores con la validación de GraphQL
 const { GraphQLError } = require('graphql')
 
 let persons = [
@@ -166,8 +166,72 @@ type Mutation{
 
 A la mutación se le dan los detalles de la persona como parámetros. El parámetro phone es el único que admite valores NULL. La mutación 
 también tiene un valor de retorno. El valor de retorno es de tipo Person, la idea es que los detalles de la persona agregada
-se devuelvan si la operación es exitosa y si no, nula. El valor del campo id no se proporciona como parámetro. Es mejor dejar la generacióon de una
+se devuelvan si la operación es exitosa y si no, nula. El valor del campo id no se proporciona como parámetro. Es mejor dejar la generación de una
 identificación para el servidor.
+
+Para generar los ID en nuestro servidor podemos usar una librería que se conoce como uuidv4 con el comando *npm i uuidv4
+
+
+Las mutaciones también requieren de un resolver:
+
+const resolvers = {
+  // ...
+  Mutation: {
+    addPerson: (root, args) => {
+      const person = { ...args, id: uuid() }
+      persons = persons.concat(person)
+      return person
+    }
+  }
+}
+
+La mutación agrega el objeto que se le agrega como parámetro *args al arreglo *persons, y devuelve el objeto que agregó al arreglo.
+
+Se puede agregar una nueva persona con la siguiente mutación:
+
+mutation {
+  addPerson(
+    name: "Pekka Mikkola"
+    phone: "045-2374321"
+    street: "Vilppulantie 25"
+    city: "Helsinki"
+  ) {
+    name
+    phone
+    address{
+      city
+      street
+    }
+    id
+  }
+}
+----------------No podemos pasar por alto que la persona se guarda en la matriz persons como:
+{
+  name: "Pekka Mikkola",
+  phone: "045-2374321",
+  street: "Vilppulantie 25",
+  city: "Helsinki",
+  id: "2b24e0b0-343c-11e9-8c2a-cb57c2bf804f"
+}
+
+Pero la respuesta de la mutación es:
+{
+  "data": {
+    "addPerson": {
+      "name": "Pekka Mikkola",
+      "phone": "045-2374321",
+      "address": {
+        "city": "Helsinki",
+        "street": "Vilppulantie 25"
+      },
+      "id": "2b24e0b0-343c-11e9-8c2a-cb57c2bf804f"
+    }
+  }
+}
+
+Lo anterior indica que el resolver del campo Address del tipo Person formatea el objeto de respuesta en la forma correcta.
+
+
 
 
  */
@@ -230,8 +294,7 @@ El segundo parámetro, args, contiene los parámetros de la consulta. El resolut
 a la persona cuyo nombre es el mismo que el valor de *args.name. En este caso no se hace uso del primer parámetro.
 
 *No olvidar
-Todos los resolvers tienen 4 parámetros. Con Javascript los parámetros no tienen que estar definidos, si no son 
-necesarios.
+Todos los resolvers tienen 4 parámetros. Con Javascript los parámetros no tienen que estar definidos, si no son necesarios.
 
 En el ejemplo anterior cuando buscamos a "Arto Hellas", tenemos que preguntarnos, ¿sabe el servidor devolver exactamente
 los campos requeridos por la consulta?
