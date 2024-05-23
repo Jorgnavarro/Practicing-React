@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache, gql } from '@apollo/client'
-
+/*
+*Para comenzar con nuestro cliente después de npm i @apollo/client graphql
+El comienzo del código crea un nuevo objeto-client, que luego se usa para enviar una consulta al server
+*/
 const client = new ApolloClient({
    cache: new InMemoryCache(),
    link: new HttpLink({
@@ -28,6 +31,11 @@ client.query({ query })
   .then((response) => {
     console.log(response.data)
   })
+
+/*
+Acá traemos la información del servidor y la imprimimos por consola.
+
+*/
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
