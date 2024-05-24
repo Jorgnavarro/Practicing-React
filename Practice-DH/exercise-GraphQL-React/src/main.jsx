@@ -32,10 +32,10 @@ client.query({ query })
     console.log(response.data)
   })
 
-/*
-Acá traemos la información del servidor y la imprimimos por consola.
 
-*/
+//Acá traemos la información del servidor y la imprimimos por consola.
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -44,3 +44,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ApolloProvider>
   </React.StrictMode>,
 )
+
+/**
+La aplicación puede comunicarse con un servidor GraphQL usando el objeto "client". se puede hacer que el cliente
+sea accesible para todos los componentes de la aplicación empaquetando el componente App con ApolloProvider
+
+ */
