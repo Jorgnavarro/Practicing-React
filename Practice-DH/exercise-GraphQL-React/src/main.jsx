@@ -47,6 +47,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 /**
 La aplicación puede comunicarse con un servidor GraphQL usando el objeto "client". se puede hacer que el cliente
-sea accesible para todos los componentes de la aplicación empaquetando el componente App con ApolloProvider
-
+sea accesible para todos los componentes de la aplicación empaquetando el componente App con <ApolloProvider/>
  */

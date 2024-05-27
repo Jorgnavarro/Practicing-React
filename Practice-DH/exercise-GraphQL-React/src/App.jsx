@@ -10,12 +10,21 @@ Es mejor usar librerías de orden superior capaz de abstraer los detalles innece
 
 Las opciones que se ofrecen para ello: Relay por Facebook y Apollo Client, este último implementado en este
 ejercicio
+*/
 
+/*
+ *Realización de consultas:
+Apollo client ofrece algunas alternativas para realizar consultas. Actualmente, el uso de la función hook "useQuery"
+es la práctica dominante
+
+Se crea una constante ALL_PERSONS, se inicia con -gql `query{allPersons{//...} queryFindPersonByName(...){//...}}`
+La cual se pasará como parámetro a useQuery(ALL_PERSONS), esta consulta para poder ser recuperada se almacena 
+en la const result. De la cual, mientras se carga la información se puede mostrar un elemento para la carga
+con result.loading
+
+Para obtener los datos específicos de la consulta, se deberá acceder a result.data.allPersons
  */
 
-/**
- * Variables
- */
 
 const ALL_PERSONS = gql `
   query {
