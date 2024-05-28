@@ -25,6 +25,60 @@ con result.loading
 Para obtener los datos específicos de la consulta, se deberá acceder a result.data.allPersons
  */
 
+/*
+*Consultas y variables con nombres:
+Para la siguiente consulta, se implementa la funcionalidad para poder ver los detalles de una persona cuando
+se busca por su nombre:
+query {
+  findPerson(name: "Arto Hellas") {
+    phone 
+    city 
+    street
+    id
+  }
+}
+
+Las recomendaciones que se exigen cuando se hacen consultas programáticamente, se deben hacer de forma dinámica,
+en otras palabras los parámetros deben ser dinámicos. Para lo anterior se hace uso de las variables que nos 
+ofrece GraphQL, revisemos el siguiente formato:
+
+query findPersonByName($nameToSearch: String!) {
+  findPerson(name: $nameToSearch) {
+    name
+    phone 
+    address {
+      street
+      city
+    }
+  }
+}
+
+El nombre de la consulta es findPersonByName, se le da una cadena $nameToSearch como parámetro. También es posible
+realizar lo anterior pasando los parámetros en el playground, en variables de consulta.
+
+*OJO: el hook useQuery es adecuado cuándo al tiempo que se procesa el componente se realiza la consulta
+casi que de forma paralela. Pero ahora, queremos realizar una consulta solo cuando un usuario desear ver los
+detalles de una person específica, por lo que la consulta se realiza sólo según sea necesario.
+
+Para esta situación se implementa el hook "useLazyQuery", el componente Persons se convierte en:
+
+const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      name
+      phone 
+      id
+      address {
+        street
+        city
+      }
+    }
+  }
+`
+
+
+*/
+
 
 const ALL_PERSONS = gql `
   query {
@@ -34,16 +88,11 @@ const ALL_PERSONS = gql `
       id
     }
   }
-
-  query findPersonByName($nameToSearch: String!) {
-    findPerson(name: $nameToSearch){
-      phone
-      city
-      street
-      id
-    }
-  }
 `
+
+/**
+ * 
+ */
 
 function App() {
   const result = useQuery(ALL_PERSONS)
