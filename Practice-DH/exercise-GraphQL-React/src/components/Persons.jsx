@@ -76,7 +76,8 @@ const Persons = ({ persons }) => {
                 <button onClick={() => showPerson(p.name)}>Show address</button>
             </div>
         })}
-    </div>)
+    </div>
+    )
 }
 
 export default Persons
